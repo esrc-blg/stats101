@@ -1,0 +1,79 @@
+# Type coercion
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Seminar
+
+We often need to change the type of a variable. This can be necessary to clean data or because we add a new level to a factor like in the previous section on amending data frames. We begin by loading the england dataset that we created previously.
+
+```{r}
+england <- read.csv(file = "england.csv", sep = ",", header = TRUE)
+```
+
+Recall that we could not add "Brittany" as a name to our variable. This was because the variable name is stored as a factor and "Brittany" was a new category. The easiest way to add the name "Brittany" is to convert the name variable into a character variable.
+
+### Coerce a factor to character
+
+Let's check our england dataset's variable types.
+.
+```{r}
+str(england)
+```
+
+The variable "name" is a factor variable and needs to be converted to a character variable. We coerce the variable into a different type using the `as.character()` function.
+
+```{r}
+england$name <- as.character(england$name)
+```
+
+Let's inspect the variable types of our dataset again:
+
+```{r}
+str(england)
+```
+
+The variable name is now a character variable. We now change the last value of the name variable into Brittany. 
+
+```{r}
+england$name[ length(england$name) ] <- "Brittany"
+```
+
+Let's inspect our change.
+
+```{r}
+england
+```
+
+### Coerce a character variable into a factor variable
+
+We can now easily convert the variable type back from character into a factor with the `as.factor()` function like so:
+
+```{r}
+england$name <- as.factor(england$name)
+str(england)
+```
+
+
+### Coerce a character variable into a numeric variable
+
+In R missing vlues are called `NA` for numeric types and `""` for character types. When we use load third party data, the coding often differs. This can happen, for instance, due to data entry errors.
+
+We simulate a data entry error by changing the population value of Brittany to a character value.
+
+```{r}
+england$population[ length(england$population) ] <- "mistake"
+str(england)
+```
+
+Notice, that the variable population is now a character vector instead of a numeric vector. Whenever numbers and text are mixed, R will automatically treat the vector as a character vector.
+
+We can convert the population variable back into a numeric variable using the `as.numeric()` function. All values that are not recognised as numbers will be changed to `NA`.
+
+```{r}
+england$population <- as.numeric(england$population)
+str(england)
+england
+```
+

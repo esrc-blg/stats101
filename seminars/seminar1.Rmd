@@ -1,0 +1,77 @@
+# Introduction to R and RStudio
+
+```{r package_options, include=FALSE}
+knitr::opts_knit$set(global.par = TRUE)
+```
+
+```{r, include = FALSE}
+par(bg = '#fdf6e3')
+```
+
+## Learning objectives
+
+In this session, we will have a look at R and RStudio. We will interact with both and use the various components of RStudio.
+
+### What is R?
+
+R is an environment for statistical computing and graphics. RStudio is an editor or integrated development environment (IDE) that makes working with R much more comfortable.
+
+To install R and RStudio on your computer, download both from the following sources:
+
+- Download R from [The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org) 
+- Download RStudio from [RStudio.com](https://www.rstudio.com)
+
+Keep both R and RStudio up to date. That means go online and check for newer versions. In case there are new versions, download those and re-install.
+
+### RStudio
+
+Let's get acquainted with R. When you start RStudio for the first time, you'll see three panes:
+
+![](./img/rstudio_default.png)
+
+### Console
+
+The Console in RStudio is the simplest way to interact with R. You can type some code at the Console and when you press ENTER, R will run that code. Depending on what you type, you may see some output in the Console or if you make a mistake, you may get a warning or an error message.
+
+Let's familiarize ourselves with the console by using R as a simple calculator:
+
+```{r}
+2 + 4
+```
+
+Now that we know how to use the `+` sign for addition, let's try some other mathematical operations such as subtraction (`-`), multiplication (`*`), and division (`/`).
+
+```{r}
+10 - 4
+5 * 3
+7 / 2
+```
+
+| | |
+|-----------------------------------------------------------------|-----------------------|
+|You can use the cursor or arrow keys on your keyboard to edit your code at the console:<br>- Use the UP and DOWN keys to re-run something without typing it again<br>- Use the LEFT and RIGHT keys to edit|![](./img/rstudio_cursorkeys.png)|
+
+Take a few minutes to play around at the console and try different things out. Don't worry if you make a mistake, you can't break anything easily!
+
+### Scripts
+
+The Console is great for simple tasks but if you're working on a project you would mostly likely want to save your work in some sort of a document or a file. Scripts in R are just plain text files that contain R code. You can edit a script just like you would edit a file in any word processing or note-taking application.
+
+Create a new script using the menu or the toolbar button as shown below.
+
+![](./img/rstudio_newfile.png)
+
+Once you've created a script, it is generally a good idea to give it a meaningful name and save it immediately. For our first session save your script as **seminar1.R**
+
+| | |
+|----------------------------------------------------|------------------------------------------|
+|Familiarize yourself with the script window in RStudio, and especially the two buttons labeled **Run** and **Source**|![](./img/rstudio_script.png)|
+
+There are a few different ways to run your code from a script.
+
+| | |
+|------------------|-------------------------------------------------------|
+|One line at a time|Place the cursor on the line you want to run and hit CTRL-ENTER or use the **Run** button|
+|Multiple lines    |Select the lines you want to run and hit CTRL-ENTER or use the **Run** button|
+|Entire script     |Use the **Source** button|
+

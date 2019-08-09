@@ -1,0 +1,6 @@
+name: Introduction_to_Statistics_with_R
+description: Introduction to Quantitative Methods
+
+config_file: ~/.stats101
+working_dir: ~/stats101
+
