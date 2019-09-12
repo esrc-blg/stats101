@@ -137,7 +137,7 @@ Datasets can be exported in many different file formats. We recommend exporting 
 Lets save the data we have open on pereceptions of non-western immigration. It is important to select a new file name, i.e. "newdata.csv", otherwise R overwrites the original dataframe and data may be lost. If updating a dataframe, it is good practice to save a file as V1.0, then V1.1 and so on. Let's try this below:
 
 ```{r}
-write.table(dat4, 
+write.table(dat3, 
             file = "non_western_immigrants_V1.1.csv",
             sep = ",",
             row.names = FALSE,

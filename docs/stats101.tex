@@ -281,8 +281,8 @@ Use the \textbf{Source} button\strut
 \bottomrule
 \end{longtable}
 
-\hypertarget{data-types-and-levels-of-measurement}{%
-\section{Data Types and Levels of Measurement}\label{data-types-and-levels-of-measurement}}
+\hypertarget{data-stuctures-and-data-types}{%
+\section{Data Stuctures and Data Types}\label{data-stuctures-and-data-types}}
 
 \hypertarget{seminar}{%
 \subsection{Seminar}\label{seminar}}
@@ -648,6 +648,398 @@ Access the second column of the third layer on your own.
 \begin{verbatim}
 [1] 15 16
 \end{verbatim}
+
+\hypertarget{creating-and-exploring-data-frames}{%
+\section{Creating and Exploring Data Frames}\label{creating-and-exploring-data-frames}}
+
+\hypertarget{seminar-1}{%
+\subsection{Seminar}\label{seminar-1}}
+
+In this session we introduce data frames using R-syntax.
+
+\hypertarget{clearing-your-workspace-from-previous-work}{%
+\subsubsection{Clearing your workspace from previous work}\label{clearing-your-workspace-from-previous-work}}
+
+To remove a specific object or in this case a matrix, we can use the following command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "chapter_header"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(mat1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning in rm(mat1): object 'mat1' not found
+\end{verbatim}
+
+Otherwise we can remove everything, which is good practice when starting new work. The same can also be achieved by clicking on the yellow broomstick in the Enviornemnt and Files Panel in R Studio (top right hand panel)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{( }\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{() )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{creating-data-frames}{%
+\subsubsection{Creating data frames}\label{creating-data-frames}}
+
+A data frame is an object that holds data in a tabular format similar to how spreadsheets work. Variables are generally kept in columns and observations are in rows. Data frames are similar to matrices but they can store vectors of different types (e.g.~numbers and text).
+
+We start by creating a data frame with the \texttt{data.frame()} function. We will give each column a name (a variable name) followed by the \texttt{=} operator and the respective vector of data that we want to assign to that column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"South East"}\NormalTok{, }\StringTok{"London"}\NormalTok{, }\StringTok{"North West"}\NormalTok{, }\StringTok{"East of England"}\NormalTok{, }\StringTok{"West Midlands"}\NormalTok{, }\StringTok{"South West"}\NormalTok{,}
+           \StringTok{"Yorkshire and the Humber"}\NormalTok{, }\StringTok{"East Midlands"}\NormalTok{, }\StringTok{"North East"}\NormalTok{),}
+  \DataTypeTok{population =} \KeywordTok{c}\NormalTok{(}\FloatTok{8.6}\NormalTok{, }\FloatTok{8.2}\NormalTok{, }\FloatTok{7.1}\NormalTok{, }\FloatTok{5.9}\NormalTok{, }\FloatTok{5.6}\NormalTok{, }\FloatTok{5.3}\NormalTok{, }\FloatTok{5.3}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\FloatTok{2.6}\NormalTok{),}
+  \DataTypeTok{earnings =} \KeywordTok{c}\NormalTok{(}\FloatTok{28.7}\NormalTok{, }\FloatTok{35.1}\NormalTok{, }\FloatTok{25.2}\NormalTok{, }\FloatTok{26.6}\NormalTok{, }\FloatTok{24.9}\NormalTok{, }\FloatTok{25.6}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{25}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also display the entire dataset in spreadsheet view by clicking on the object name in the environment window.
+
+\includegraphics{./img/dataframe_in_spreadsheet_view.png}
+
+\hypertarget{working-with-data-frames}{%
+\subsubsection{Working with data frames}\label{working-with-data-frames}}
+
+we can display the entire dataset in spreadsheet view by clicking on the object name in the environment window.
+
+Alternatively, you can call the object name to display the dataset in the console window. Let's do so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                      name population earnings
+1               South East        8.6     28.7
+2                   London        8.2     35.1
+3               North West        7.1     25.2
+4          East of England        5.9     26.6
+5            West Midlands        5.6     24.9
+6               South West        5.3     25.6
+7 Yorkshire and the Humber        5.3     25.0
+8            East Midlands        4.5     25.0
+9               North East        2.6     25.0
+\end{verbatim}
+
+Often, datasets are too long to be viewed to in the console window. It is a good idea to look at the first couple of rows of a datasets to get an overview of its contents. We use the square brackets \texttt{{[}{]}} to view the first five rows and all columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             name population earnings
+1      South East        8.6     28.7
+2          London        8.2     35.1
+3      North West        7.1     25.2
+4 East of England        5.9     26.6
+5   West Midlands        5.6     24.9
+\end{verbatim}
+
+v
+Columns in a dataframe have names. We will often need to know the name of a column/variable to access it. We use the \texttt{names()} function to view all variable names in a dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(england)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "name"       "population" "earnings"  
+\end{verbatim}
+
+We can access the earnings variable in multiple ways. First, we can use the \texttt{\$} operator. We write the name of the dataset object, followed by the \texttt{\$}, followed by the variable name like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england}\OperatorTok{$}\NormalTok{population}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6
+\end{verbatim}
+
+We can also use the square brackets to access the earnings column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england[, }\StringTok{"population"}\NormalTok{ ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6
+\end{verbatim}
+
+The square brackets are sometimes preferred because we could access multiple columns at once like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{england[, }\KeywordTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{, }\StringTok{"population"}\NormalTok{) ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                      name population
+1               South East        8.6
+2                   London        8.2
+3               North West        7.1
+4          East of England        5.9
+5            West Midlands        5.6
+6               South West        5.3
+7 Yorkshire and the Humber        5.3
+8            East Midlands        4.5
+9               North East        2.6
+\end{verbatim}
+
+You can also explore the variable further. For instance, calculate the average population in England and then select regions that have a population higher than this average. Again the dataset object is followed by the \texttt{\$}and then the variable name like so
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(england}\OperatorTok{$}\NormalTok{population)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avg.pop =}\StringTok{ }\KeywordTok{mean}\NormalTok{(england}\OperatorTok{$}\NormalTok{population)}
+\NormalTok{england [england}\OperatorTok{$}\NormalTok{population }\OperatorTok{>}\StringTok{ }\NormalTok{avg.pop,}
+         \KeywordTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{, }\StringTok{"population"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             name population
+1      South East        8.6
+2          London        8.2
+3      North West        7.1
+4 East of England        5.9
+\end{verbatim}
+
+Variables come in different types such as numbers, text, logical (true/false). We need to know the type of a variable because the type affects statistical analysis. We use the \texttt{str()} function to check the type of each variable in our dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(england)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   9 obs. of  3 variables:
+ $ name      : Factor w/ 9 levels "East Midlands",..: 6 3 5 2 8 7 9 1 4
+ $ population: num  8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6
+ $ earnings  : num  28.7 35.1 25.2 26.6 24.9 25.6 25 25 25
+\end{verbatim}
+
+The first variable in our dataset is a factor variable. Factors are categorical variables. Categories are mutually exclusive but they do not imply an ordering. For instance, ``East of England'' is not more or less than ``West Midlands''. The variables population and earnings are both numeric variables.
+
+\hypertarget{data-import-from-csv-txt-and-excel-and-saving-data-frames}{%
+\section{Data Import (from csv, txt, and excel) and Saving Data Frames}\label{data-import-from-csv-txt-and-excel-and-saving-data-frames}}
+
+\hypertarget{seminar-2}{%
+\subsection{Seminar}\label{seminar-2}}
+
+In this section, we will learn how to check and set our working directory, load data in csv, txt, excel and R format, and then save our data frame.
+
+\hypertarget{setting-up}{%
+\subsubsection{Setting up}\label{setting-up}}
+
+We set our working directory. R operates in specific directory (folder) on our computer. We create a folder on where we save our scripts. We name the folder \texttt{Stats101}. Let's create the folder on our computers now (in finder on Mac and explorer on Windows).
+
+Now, we set our working directory to the folder, we just created like so:
+
+\includegraphics{./img/setwdir.png}
+
+Create a new R script and save it as day1.R to your \texttt{Stats101} directory.
+
+At the beginning of each new script, we want to clear the workspace. The workspace is stored in working memory on our computer. If we do not clear it for a new script, it becomes too full over time. Our computer will slow down and it will become difficult for us to know which objects are stored in working memory.
+
+Again, as we are starting a new script we should check the contents of our workspace like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# check workspace}
+\KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Again to remove a specific object, we use the \texttt{rm()} function which stands for remove. Within the round brackets, we put the name of the object we want to remove. We could remove the object \texttt{a} like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# delete variable 'a' from workspace}
+\KeywordTok{rm}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+At the beginning of each script, we should always clear the entire workspace. We can do so in the following way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# delete everything from workspace}
+\KeywordTok{rm}\NormalTok{( }\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{() )}
+\end{Highlighting}
+\end{Shaded}
+
+You can also clear text from the console window. To do so press Crtl+l on Windows or Command+l on Mac.
+
+\hypertarget{loading-data}{%
+\subsubsection{Loading data}\label{loading-data}}
+
+Data comes in different file formats such as \texttt{.txt}, \texttt{.csv}, \texttt{.xlsx}, \texttt{.RData}, \texttt{.dta} and many more. To know the file type of a file right click on it and view preferences (in Windows explorer or Mac finder).
+
+R can load files coming in many different file formats. To find out how to import a file coming in a specific format, it is usually a good idea to the google ``R load file\_format''.
+
+\hypertarget{importing-a-dataset-in-.csv-format}{%
+\subsubsection{\texorpdfstring{Importing a dataset in \texttt{.csv} format}{Importing a dataset in .csv format}}\label{importing-a-dataset-in-.csv-format}}
+
+One of the most common file types is \texttt{.csv} which means comma separated values. Columns are separated by commas and rows by line breaks.
+
+Essentially, its best to work with this data format as it can be easily loaded into R, but also easy opening outside of R.
+
+The dataset's name is ``non\_western\_immigrants.csv''. To load it, we use the \texttt{read.csv()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat1 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"non_western_immigrants.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{importing-a-dataset-in-excel-xlsx-format}{%
+\subsubsection{Importing a dataset in Excel (xlsx) format}\label{importing-a-dataset-in-excel-xlsx-format}}
+
+Another common file format is Microsoft's Excel \texttt{xlsx} format. We will load a dataset in this format now. To do so, we will need to install a package first. Packages are additional functions that we can add to R. A package is like an app on our phones.
+
+We install the \texttt{readxl} package using \texttt{install.packages("readxl")}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readxl"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We only need to install a package once. It does not hurt to do it more often though, because every time we install, it will install the most recent version of the package.
+
+Once a package is installed, we need to load it using the \texttt{library()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+To load the excel file, we can now use the \texttt{read\_excel()} function that is included in the \texttt{readxl} library. We need to provide the following arguments to the function:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Argument & Description\tabularnewline
+\midrule
+\endhead
+path & Filename of excel sheet\tabularnewline
+sheet & Sheet number to import\tabularnewline
+\bottomrule
+\end{longtable}
+
+Now, let's load the file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat2 <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(}\StringTok{"non_western_immigrants.xlsx"}\NormalTok{, }\DataTypeTok{sheet =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{importing-a-dataset-in-rdata-format}{%
+\subsubsection{Importing a dataset in RData format}\label{importing-a-dataset-in-rdata-format}}
+
+The native file format of R is called \texttt{.RData}. To load files saved in this format, we use the \texttt{load()} function like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\DataTypeTok{file =} \StringTok{"non_western_immigrants.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that we usually need to assign the object we load to using the \texttt{\textless{}-} operator. The \texttt{load()} function is an exception where we do not need to do this.
+
+\hypertarget{importing-a-dataset-in-.txt-format.}{%
+\subsubsection{Importing a dataset in .txt format.}\label{importing-a-dataset-in-.txt-format.}}
+
+Loading a dataset that comes in .txt format requires some additional information. The format is a text format and we need to know how the columns are separated. Usually it is enough to open the file in a word processor such as notepad to see how this is done. The most common ways to separate columns is by using commas or tabs but other separators such as for instance semicolons are sometimes also used.
+
+In our example, columns are separated by semicolons. We use the \texttt{read.table()} function and provide the following arguments:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Argument & Description\tabularnewline
+\midrule
+\endhead
+file & Filename of excel sheet\tabularnewline
+sep & the symbol that separates columns\tabularnewline
+header & whether the first row contains variable names or not\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat3 <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\DataTypeTok{file =} \StringTok{"non_western_immigrants.txt"}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{saving-data-frames}{%
+\subsubsection{Saving data frames}\label{saving-data-frames}}
+
+Datasets can be exported in many different file formats. We recommend exporting files as ``.csv'' files because csv is a very common file type. Such files can be handled by all statistical packages including Microsoft's Excel. We need to provide five arguments.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Argument & Description\tabularnewline
+\midrule
+\endhead
+x & The name of the object\tabularnewline
+file & The file name\tabularnewline
+sep & The symbol that separates columns\tabularnewline
+col.names & = TRUE saves the variable names (recommended)\tabularnewline
+row.names & = FALSE omits the row names (recommended)\tabularnewline
+\bottomrule
+\end{longtable}
+
+Lets save the data we have open on pereceptions of non-western immigration. It is important to select a new file name, i.e.~``newdata.csv'', otherwise R overwrites the original dataframe and data may be lost. If updating a dataframe, it is good practice to save a file as V1.0, then V1.1 and so on. Let's try this below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{write.table}\NormalTok{(dat3, }
+            \DataTypeTok{file =} \StringTok{"non_western_immigrants_V1.1.csv"}\NormalTok{,}
+            \DataTypeTok{sep =} \StringTok{","}\NormalTok{,}
+            \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{,}
+            \DataTypeTok{col.names =} \OtherTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 
 \end{document}
