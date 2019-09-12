@@ -8,7 +8,7 @@ par(bg = '#fdf6e3')
 
 In this session we introduce R-syntax, and data types.
 
-### central t
+### Functions
 
 Functions are a set of instructions that carry out a specific task. Functions often require some input and generate some output. For example, instead of using the `+` operator for addition, we can use the `sum` function to add two or more numbers.
 
