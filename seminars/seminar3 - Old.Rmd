@@ -1,4 +1,4 @@
-# Data Import (from csv, txt, and excel) and Saving Data Frames
+# Data import (from csv, txt, and excel)
 
 ```{r, include = FALSE}
 par(bg = '#fdf6e3')
@@ -6,28 +6,28 @@ par(bg = '#fdf6e3')
 
 ## Seminar
 
-In this section, we will learn how to check and set our working directory, load data in csv, txt, excel and R format, and then save our data frame.
+In this section, we will load data in csv, txt, excel and R format. We will learn how to check and set our working directory.
 
 ### Setting up
 
-We set our working directory. R operates in specific directory (folder) on our computer. We create a folder on where we save our scripts. We name the folder `Stats101`. Let's create the folder on our computers now (in finder on Mac and explorer on Windows).
+We set our working directory. R operates in specific directory (folder) on our computer. We create a folder on where we save our scripts. We name the folder `suffolk2019`. Let's create the folder on our computers now (in finder on Mac and explorer on Windows).
 
 Now, we set our working directory to the folder, we just created like so:
 
 ![](./img/setwdir.png)
 
-Create a new R script and save it as day1.R to your `Stats101` directory. 
+Create a new R script and save it as day1.R to your `suffolk2019` directory. 
 
 At the beginning of each new script, we want to clear the workspace. The workspace is stored in working memory on our computer. If we do not clear it for a new script, it becomes too full over time. Our computer will slow down and it will become difficult for us to know which objects are stored in working memory.
 
-Again, as we are starting a new script we should check the contents of our workspace like so:
+We check the contents of our workspace like so:
 
 ```{r, eval=FALSE}
 # check workspace
 ls()
 ```
 
-Again to remove a specific object, we use the `rm()` function which stands for remove. Within the round brackets, we put the name of the object we want to remove. We could remove the object `a` like so:
+To remove a specific object, we use the `rm()` function which stands for remove. Within the round brackets, we put the name of the object we want to remove. We could remove the object `a` like so:
 
 ```{r, eval=FALSE}
 # delete variable 'a' from workspace
@@ -41,7 +41,7 @@ At the beginning of each script, we should always clear the entire workspace. We
 rm( list = ls() )
 ```
 
-You can also clear text from the console window. To do so press Crtl+l on Windows or Command+l on Mac.
+You can also clear text from the console window. To do so press Crtl+l on Winowds or Command+l on Mac.
 
 
 ### Loading data
@@ -52,9 +52,7 @@ R can load files coming in many different file formats. To find out how to impor
 
 ### Importing a dataset in `.csv` format
 
-One of the most common file types is `.csv` which means comma separated values. Columns are separated by commas and rows by line breaks.
-
-Essentially, its best to work with this data format as it can be easily loaded into R, but also easy opening outside of R.
+One of the most common file types is `.csv` which means comma separated values. Columns are separated by commas and rows by line breaks. 
 
 The dataset's name is "non_western_immigrants.csv". To load it, we use the `read.csv()` function.
 
@@ -119,29 +117,5 @@ In our example, columns are separated by semicolons. We use the `read.table()` f
 
 ```{r}
 dat3 <- read.table(file = "non_western_immigrants.txt", sep =";", header = TRUE)
-```
-
-
-### Saving data frames
-
-Datasets can be exported in many different file formats. We recommend exporting files as ".csv" files because csv is a very common file type. Such files can be handled by all statistical packages including Microsoft's Excel. We need to provide five arguments.
-
-|Argument         |Description               |
-|-----------------|--------------------------|
-|x                |The name of the object   |
-|file             |The file name     |
-|sep              |The symbol that separates columns   |
-|col.names              |= TRUE saves the variable names (recommended)   |
-|row.names              |= FALSE omits the row names (recommended)|
-
-Lets save the data we have open on pereceptions of non-western immigration. It is important to select a new file name, i.e. "newdata.csv", otherwise R overwrites the original dataframe and data may be lost. If updating a dataframe, it is good practice to save a file as V1.0, then V1.1 and so on. Let's try this below:
-
-```{r}
-write.table(dat4, 
-            file = "non_western_immigrants_V1.1.csv",
-            sep = ",",
-            row.names = FALSE,
-            col.names = TRUE
-)
 ```
 

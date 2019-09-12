@@ -1,4 +1,4 @@
-# Data Types and Levels of Measurement
+# Data Stuctures and Data Types
 
 ```{r, include = FALSE}
 par(bg = '#fdf6e3')
