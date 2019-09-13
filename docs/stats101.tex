@@ -1303,5 +1303,625 @@ null device
           1 
 \end{verbatim}
 
+\hypertarget{correlations-and-differences-in-means}{%
+\section{Correlations and differences in means}\label{correlations-and-differences-in-means}}
+
+\hypertarget{seminar-4}{%
+\subsection{Seminar}\label{seminar-4}}
+
+In this session, we will cover bi-variate relationships, that is relationships between two variables. For relationships between two continuous variables, we will look at correlations and plots and for relationships between a continuous dependent variable and a binary independent variable, we will look at differences in means.
+
+\hypertarget{bi-variate-relationships}{%
+\subsubsection{Bi-variate relationships}\label{bi-variate-relationships}}
+
+In data analysis we are mostly interested in understanding the relationships between two (or more) variables. For instance, between a predictor (independent variable) and an outcome of interest (dependent variable). Summary statistics are often the first steps in trying to understand relationships between variables.
+
+Initially we might want to visualise a relationship between an independent variable and a dependent variable (outcome). For example, we might want to see how two categories are related to an outcome of interest.
+
+Again, as good practice, let's first clear our workspace before we start:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{( }\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{() )}
+\end{Highlighting}
+\end{Shaded}
+
+Let's open the data again:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat1 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"non_western_immigrants.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{ (dat1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1049   13
+\end{verbatim}
+
+Here we will compare if there are differences in perceptions of non-Western immigrants between those that identify with the Convervatives and those that support the Labour party.
+
+We need to first create two new dummy variables from the categorical variable that lists identified political parties. These two binary variables will tell us observations where someone identifies with the Conservatives (1=yes and 0 = no) and the same for the Labour party (1=yes and 0=no). Here we have to use the ifelse function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat1}\OperatorTok{$}\NormalTok{conservatives <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dat1}\OperatorTok{$}\NormalTok{party_self }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{yes =} \DecValTok{1}\NormalTok{, }\DataTypeTok{no =} \DecValTok{0}\NormalTok{)}
+\NormalTok{dat1}\OperatorTok{$}\NormalTok{labour <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dat1}\OperatorTok{$}\NormalTok{party_self }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, }\DataTypeTok{yes =} \DecValTok{1}\NormalTok{, }\DataTypeTok{no =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So we create new variables within our dataframe using categories from the party\_self variable. == 1 is the category we are choosing. If the ifelse statement is true, they do identify with that party, we code yes as a 1 and no as a 0.
+
+We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(}
+\NormalTok{  dat1}\OperatorTok{$}\NormalTok{IMMBRIT[dat1}\OperatorTok{$}\NormalTok{conservatives}\OperatorTok{==}\DecValTok{1}\NormalTok{],}
+  \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{xlab =} \StringTok{"Conservatives"}\NormalTok{,}
+  \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{),}
+  \DataTypeTok{col =} \StringTok{"blue"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-74-1.pdf}
+
+and then for the Labour party:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(}
+\NormalTok{  dat1}\OperatorTok{$}\NormalTok{IMMBRIT[dat1}\OperatorTok{$}\NormalTok{labour}\OperatorTok{==}\DecValTok{1}\NormalTok{],}
+  \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{xlab =} \StringTok{"Labour"}\NormalTok{,}
+  \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{),}
+  \DataTypeTok{col =} \StringTok{"red"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-75-1.pdf}
+
+Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants.
+
+The higher values for the Labour party could be due to high Labour support in diverse urban centres such as London. Yet, these are just samples and a snapshot of the possible relationship.Samples are never the same and vary. For instance, crime is not statistic and will vary over time and space.
+
+Can we be sure that this result did not simply occur by chance?
+
+This brings us to the importance of hypothesis testing.
+
+\hypertarget{hypothesis-testing}{%
+\subsubsection{Hypothesis testing}\label{hypothesis-testing}}
+
+Because relationships can occur by chance, we engage in hyp
+
+Hypotheis testing is central to statistics. We form our own hypothesis about a potential relationship between variables and then compare this against what is known as the null hypothesis. The null hypothesis represents the notion that nothing special has occured and that the relationship we are observing could only have occured by chance, i.e.~getting heads when flipping a coin.
+
+In the lecture slides, we cover this by exploring the Lady Tea Tasting Test (Fisher, 1925). When running statistics in R and other statistical packages, most models report a t-statistic and p-value, which we then informs us of whether we should reject the null hypothesis.
+
+The t-statistic is easy to interpret. While we know 1 standard deviation from the mean represents 68\% of the distribution, more than 1.96 deviations is more than 95\% of the distribution. Therefore, if the t-statistic is higher than an absolute value of 1.96 (either 1.96 or -1.96), then the estimate we observe falls outside 95\% of possible resampled estimations and is simply too rare to have occured by chance.
+
+The p-value is based on the t-statistic and provides the actually probability that a estimate occured by chance.
+In most fields of research, the conventional threshold for a p-value is less than 0.05.This implies we will incorrectly reject the null hypothesis less than 5\% of the time.
+A p-value of 0.01 implies we will incorrectly reject the null hypothesis 1\% of the time. So the lower the p-value, the more confidence we can have in our estimate.
+If we reject the null hypothesis then the relationship we observe is statistically significant.
+
+Let's move on to a t-test to assess and outcome and whether two categories are statistically significant from one another. Here we explore difference between two estimated means.
+
+\hypertarget{t-test-difference-in-means}{%
+\subsubsection{T-test (difference in means)}\label{t-test-difference-in-means}}
+
+We are interested in whether there is a difference in income between countries that have an history of colonialisation and those that do not. Put more formally, we are interested in the difference between two conditional means. Recall that a conditional mean is the mean in a subpopulation, such as the mean of income given that the country was a victim of colonialisation (conditional mean 1).
+
+The t-test is the appropriate test-statistic. Our interval-level dependent variable is \texttt{wdi\_gdpc} which is GDP per capita taken from the World Development Indicators of the World Bank. Our binary independent variable is \texttt{h\_j}.
+
+Let's check the summary statistics of our dependent variable GDP per captia using the \href{https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/summary}{\texttt{summary()}}. It returns several descriptive statistics as well as the number of NA observations (missing values). Missing values mean that we have no information on the correct value of the variable for an observation. Missing values may be missing for many different reasons. We need to be aware of missings because we cannot calculate with missings.
+
+Lets bring the data in:{]}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat2 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"QoG2012.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(dat2}\OperatorTok{$}\NormalTok{wdi_gdpc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  226.2  1768.0  5326.1 10184.1 12976.5 63686.7      16 
+\end{verbatim}
+
+We use the \texttt{which()} function to identify the row-numbers of the countries in our dataset that have a colonial history. The code below returns the row index numbers of countries with a history of colonialisation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{which}\NormalTok{(dat2}\OperatorTok{$}\NormalTok{former_col }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1]   3   5   6   8  11  12  13  15  17  18  20  21  22  23  24  26  27
+ [18]  29  30  32  33  34  35  36  39  40  41  42  43  45  46  48  50  51
+ [35]  52  53  54  56  58  61  62  64  66  67  69  70  71  72  73  74  77
+ [52]  78  80  84  85  88  89  92  94  95  96  99 103 104 105 106 107 109
+ [69] 110 111 116 117 118 119 120 123 125 126 127 129 130 131 132 133 134
+ [86] 135 136 137 140 142 145 146 147 148 150 152 154 155 156 158 160 161
+[103] 162 164 165 166 169 172 173 174 175 176 179 180 183 185 187 188 190
+[120] 191 192 194
+\end{verbatim}
+
+Now, we can explore conditional means. Below we access the variable that we want (\texttt{wdi\_gdpc}) with the dollar sign and the rows in square brackets. The code below returns the per capita wealth of the countries with a colonial history:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{( dat2}\OperatorTok{$}\NormalTok{wdi_gdpc[dat2}\OperatorTok{$}\NormalTok{former_col }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6599.714
+\end{verbatim}
+
+Now, go ahead and find the mean per capita wealth of countries without a colonial history:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{( dat2}\OperatorTok{$}\NormalTok{wdi_gdpc[dat2}\OperatorTok{$}\NormalTok{former_col }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{], }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 16415.39
+\end{verbatim}
+
+There is a clear numeric difference. Countries with a colonial history do appear to be significantly poorer.
+
+However, we know that samples are subject to sampling variability. We therefore need to quantify the uncertainty that results from variable samples. To assess whether we can be reasonably sure that the difference between the estimates of wealth is not due to a strange sample or by chance, we carry out the t test to assess if there is a statistically significant difference between these populations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(dat2}\OperatorTok{$}\NormalTok{wdi_gdpc[dat2}\OperatorTok{$}\NormalTok{former_col }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], dat2}\OperatorTok{$}\NormalTok{wdi_gdpc[dat2}\OperatorTok{$}\NormalTok{former_col }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{],}
+       \DataTypeTok{mu =} \DecValTok{0}\NormalTok{, }\DataTypeTok{alt =} \StringTok{"two.sided"}\NormalTok{, }\DataTypeTok{conf =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Welch Two Sample t-test
+
+data:  dat2$wdi_gdpc[dat2$former_col == 1] and dat2$wdi_gdpc[dat2$former_col == 0]
+t = -5.0603, df = 101.69, p-value = 1.866e-06
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -13663.313  -5968.043
+sample estimates:
+mean of x mean of y 
+ 6599.714 16415.392 
+\end{verbatim}
+
+Let's interpret the results we get from \texttt{t.test()}. In our example the question is: Do countries with a former colonial history have different mean income levels than countries without colonial history?
+
+The dependent variable is income, while the indepedent variable is where a country has a colonial history.
+
+We know that when the t-statistic is greater then 1.96 or than -1.96, then we can safely reject the null hypothesis, i.e.~it is less than 5\% likely the estimate occured by chance. The p-value gives us a more direct probability of us wrongly rejecting the null hypothesis of \texttt{1.866e-06}which means a p-value of \texttt{0.000001866}!!!
+
+In the next line you see the 95\% confidence interval because we specified \texttt{conf=0.95}. If you were to take 100 samples and in each you checked the means of the two groups, 95 times the difference in means would be within the interval you see there.
+
+At the very bottom you see the means of the dependent variable by the two groups of the independent variable. These are the conditional means that we estimated above. By minusing the \$6599.7 from \$16414.4, we know that former colonial countries are on average \$9814.70 worst off!
+
+\hypertarget{relationships-between-continuous-variables}{%
+\subsubsection{Relationships between continuous variables}\label{relationships-between-continuous-variables}}
+
+One way to explore the relationship between two continous variables is to use correlation. This is a widely used as a summary statistic. Correlation is a measure of \textbf{linear} association. It can take values between -1 and +1. Where -1 is a perfect negative relationship, 0 is a no relationship and +1 is a perfect positive relationship. 0 means there is no relationship, as would be expected if the null hypothesis was true.
+
+We estimate the correlation coefficient in the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ dat2}\OperatorTok{$}\NormalTok{undp_hdi, }\DataTypeTok{x =}\NormalTok{ dat2}\OperatorTok{$}\NormalTok{wbgi_cce, }\DataTypeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.6821114
+\end{verbatim}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.11\columnwidth}\raggedright
+Argument\strut
+\end{minipage} & \begin{minipage}[b]{0.83\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\texttt{x}\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+The independent variable that you want to correlate.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\texttt{y}\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+The dependent variable that you want to correlate.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\texttt{use}\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+How R should handle missing values. \texttt{use="complete.obs"} will use only those rows where neither \texttt{x} nor \texttt{y} is missing.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The interpretation of the correlation coefficient is that there is a positive relationship. However, the correlation coefficients does not tell us the magnitude of the relationship.
+
+Another weakness is that it is a measure of linear association only. That means, there could be a curvilinear (or non-linear) realtionship which we miss (for instance a u-shaped relationship).
+
+Often the best way to get a sense for the relationship beetween two continuous variables is visual inspection using a scatter plot. The human development index measures the quality of life and the World Bank Control of Corruption Index is a measure for the quality if institutions. We want to evaluate whether the two variables are related at all. Here, we could form the hypothesis that better insitutions improve the quality of life of citizens.
+
+To investigate this relationship, we construct a scatterplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ dat2}\OperatorTok{$}\NormalTok{wbgi_cce,}
+  \DataTypeTok{y =}\NormalTok{ dat2}\OperatorTok{$}\NormalTok{undp_hdi,}
+  \DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+  \DataTypeTok{frame =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{xlab =} \StringTok{"World Bank Control of Corruption Index"}\NormalTok{,}
+  \DataTypeTok{ylab =} \StringTok{"UNDP Human Development Index"}\NormalTok{,}
+  \DataTypeTok{main =} \StringTok{"Relationship b/w Quality of Institutions and Quality of Life"}\NormalTok{,}
+  \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
+  \DataTypeTok{col =} \StringTok{"darkgray"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-83-1.pdf}
+
+The plot will give you a good idea whether about whether these two variables are related or not. Sometimes, the correleation coefficient is reported.
+
+Overall, summary statistics are an important step in understanding the relationship between variables and whether such relationships occur by chance. However, this does not tell us much about the magnitude of the relationships we seek to explore. For this we must switch our attention to linear regression, which provides coefficients that can be interpreted as the extent to which a independent variable impacts a dependent variable. Linear regression also allows us to control for other independent variables which may also explain our dependent variable, i.e.~alternative explainations of the outcome we are exploring.
+
+\hypertarget{regression}{%
+\section{Regression}\label{regression}}
+
+\hypertarget{seminar-5}{%
+\subsection{Seminar}\label{seminar-5}}
+
+In this section, we will cover regression models. We will first introduce the bivariate linear regression model. We will then move to linear models with multiple independent variables.
+
+\hypertarget{bivariate-linear-regression}{%
+\subsubsection{Bivariate linear regression}\label{bivariate-linear-regression}}
+
+We will use a dataset collected by the US census bureau that contains several socioeconomic indicators.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{communities <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"communities.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The dataset includes 38 variables but we're only interested in a handful at the moment.
+
+\begin{tabular}{l|l}
+\hline
+Variable & Description\\
+\hline
+PctUnemployed & proportion of citizens in each community who are unemployed\\
+\hline
+PctNotHSGrad & proportion of citizens in each community who failed to finish high-school\\
+\hline
+population & proportion of adult population living in cities\\
+\hline
+\end{tabular}
+
+If we summarize these variables with the \texttt{summary()} function, we will see that they are both measured as proportions (they vary between 0 and 1):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(communities}\OperatorTok{$}\NormalTok{PctUnemployed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.2200  0.3200  0.3635  0.4800  1.0000 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(communities}\OperatorTok{$}\NormalTok{PctNotHSGrad)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.2300  0.3600  0.3833  0.5100  1.0000 
+\end{verbatim}
+
+It will be a little easier to interpret the regression output if we convert these to percentages rather than proportions. We can do this with the following lines of code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{communities}\OperatorTok{$}\NormalTok{PctUnemployed <-}\StringTok{ }\NormalTok{communities}\OperatorTok{$}\NormalTok{PctUnemployed }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\NormalTok{communities}\OperatorTok{$}\NormalTok{PctNotHSGrad <-}\StringTok{ }\NormalTok{communities}\OperatorTok{$}\NormalTok{PctNotHSGrad }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+We can begin by drawing a scatterplot with the percentage of unemployed people on the y-axis and the percentage of adults without high-school education on the x-axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctNotHSGrad,}
+  \DataTypeTok{y =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctUnemployed,}
+  \DataTypeTok{xlab =} \StringTok{"Adults without high school education (%)"}\NormalTok{,}
+  \DataTypeTok{ylab =} \StringTok{"Unemployment (%)"}\NormalTok{,}
+  \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{pch =} \DecValTok{20}\NormalTok{,}
+  \DataTypeTok{col =} \StringTok{"LightSkyBlue"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-90-1.pdf}
+
+From looking at the plot, what is the association between the unemployment rate and lack of high-school level education?
+
+In order to answer that question empirically, we will run a linear regression using the \href{http://bit.ly/R_lm}{\texttt{lm()}} function in R. The \href{http://bit.ly/R_lm}{\texttt{lm()}} function needs to know a) the relationship we're trying to model and b) the dataset for our observations. The two arguments we need to provide to the \href{http://bit.ly/R_lm}{\texttt{lm()}} function are described below.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.11\columnwidth}\raggedright
+Argument\strut
+\end{minipage} & \begin{minipage}[b]{0.83\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\texttt{formula}\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+The \texttt{formula} describes the relationship between the dependent and independent variables, for example \texttt{dependent.variable\ \textasciitilde{}\ independent.variable} In our case, we'd like to model the relationship using the formula: \texttt{PctUnemployed\ \textasciitilde{}\ PctNotHSGrad}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\texttt{data}\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+This is simply the name of the dataset that contains the variable of interest. In our case, this is the merged dataset called \texttt{communities}.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+For more information on how the \texttt{lm()} function works, type help(lm) in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(PctUnemployed }\OperatorTok{~}\StringTok{ }\NormalTok{PctNotHSGrad, }\DataTypeTok{data =}\NormalTok{ communities)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{interpreting-regression-output}{%
+\subsubsection{Interpreting Regression Output}\label{interpreting-regression-output}}
+
+The \href{http://bit.ly/R_lm}{\texttt{lm()}} function has modeled the relationship between \texttt{PctUnemployed} and \texttt{PctNotHSGrad} and we've saved it in an object called \texttt{model1}. Let's use the \href{http://bit.ly/R_summary}{\texttt{summary()}} function to see what this linear model looks like.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+The output from \href{http://bit.ly/R_summary}{\texttt{summary()}} might seem overwhelming at first so let's break it down one item at a time.
+
+\includegraphics[width=7.29167in,height=\textheight]{img/lm-annotated-1.png}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.07\columnwidth}\raggedright
+\#\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\raggedright
+Item\strut
+\end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{1}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{formula}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The \emph{formula} describes the relationship between the dependent and independent variables\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{2}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{residuals}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The differences between the observed values and the predicted values are called \emph{residuals}.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{3}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{coefficients}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The \emph{coefficients} for all the \emph{independent} variables and the intercept. Using the \emph{coefficients} we can write down the relationship between the \emph{dependent} and the \emph{independent} variables as: \texttt{PctUnemployed} = 7.8952023 + ( 0.7423853 * \texttt{PctNotHSGrad} ) This tells us that for each unit increase in the variable \texttt{PctNotHSGrad}, the \texttt{PctUnemployed} increases by 0.7423853.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{4}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{standard error}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The \emph{standard error} estimates the standard deviation of the sampling distribution of the coefficients in our model. We can think of the \emph{standard error} as the measure of precision for the estimated coefficients.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{5}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{t-statistic}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The \emph{t-statistic} is obtained by dividing the \emph{coefficients} by the \emph{standard error}.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{6}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\emph{p-value}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+The \emph{p-value} for each of the coefficients in the model. Recall that according to the null hypotheses, the value of the coefficient of interest is zero. The \emph{p-value} tells us whether can can reject the null hypotheses or not.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
+\textbf{7}\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(R^2\) and \emph{adj-\(R^2\)}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
+tell us how much of the variance in our model is accounted for by the \emph{independent} variable. The \emph{adjusted \(R^2\)} is always smaller than \emph{\(R^2\)} as it takes into account the number of \emph{independent} variables and degrees of freedom.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Now let's add a regression line to the scatter plot using the \href{http://bit.ly/R_abline}{\texttt{abline()}} function.
+
+First we run the same \href{http://bit.ly/R_plot}{\texttt{plot()}} function as before, then we overlay a line with \href{http://bit.ly/R_abline}{\texttt{abline()}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctNotHSGrad,}
+  \DataTypeTok{y =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctUnemployed,}
+  \DataTypeTok{xlab =} \StringTok{"Adults without high school education (%)"}\NormalTok{,}
+  \DataTypeTok{ylab =} \StringTok{"Unemployment (%)"}\NormalTok{,}
+  \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{pch =} \DecValTok{20}\NormalTok{,}
+  \DataTypeTok{col =} \StringTok{"LightSkyBlue"}
+\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(model1, }\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-93-1.pdf}
+
+We can see by looking at the regression line that it matches the coefficients we estimated above. For example, when \texttt{PctNotHSGrad} is equal to zero (i.e.~where the line intersects the Y-axis), the predicted value for \texttt{PctUnemployed} seems to be above 0 but below 10. This is good, as the \emph{intercept} coefficient we estimated in the regression was 7.8952023.
+
+Similarly, the coefficient for the variable \texttt{PctNotHSGrad} was estimated to be 0.7423853, which implies that a one point increase in the percentage of citizens with no high-school education is associated with about 0.7423853 of a point increase in the percentage of citizens who are unemployed. The line in the plot seems to reflect this: it is upward sloping, so that higher levels of the no high-school variable are associated with higher levels of unemployment, but the relationship is not quite 1-to-1. That is, for each additional percentage point of citzens without high school education, the percentage of citizens who are unemployed increases by a little less than one point.
+
+\hypertarget{multivariate-linear-regression}{%
+\subsubsection{Multivariate linear regression}\label{multivariate-linear-regression}}
+
+We might be interested in other variables that could explain the outcome. For instance, unemployment may be explained whether an community has a high urban population. For example, a more urban population may have better access to jobs.
+
+Again we need to change the scale of a variable of interest - urban populationx, so that it is more interpretable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{communities}\OperatorTok{$}\NormalTok{PctUrban <-}\StringTok{ }\NormalTok{communities}\OperatorTok{$}\NormalTok{population }\OperatorTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+Now lets add this to the model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(PctUnemployed }\OperatorTok{~}\StringTok{ }\NormalTok{PctNotHSGrad }\OperatorTok{+}\StringTok{ }\NormalTok{PctUrban, }\DataTypeTok{data =}\NormalTok{ communities)}
+\KeywordTok{summary}\NormalTok{(model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = PctUnemployed ~ PctNotHSGrad + PctUrban, data = communities)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-41.203  -8.372  -1.274   7.399  57.474 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   7.17377    0.64909  11.052  < 2e-16 ***
+PctNotHSGrad  0.73651    0.01480  49.748  < 2e-16 ***
+PctUrban      0.16436    0.02362   6.957 4.69e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.36 on 1991 degrees of freedom
+Multiple R-squared:  0.5636,    Adjusted R-squared:  0.5631 
+F-statistic:  1286 on 2 and 1991 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+The coefficient for urban population is positive, which suggests a higher urban population increases unemployment. A one unit change in population increases unemployment by 1.64\%. Because this variable is at the same scale, we can compare this with the coefficient concerning the percentage of people without high school education. The p-value for this coefficient is also extremely low, meaning the estimate is statistically significant. Finally, we can see that the adjusted R-square has moved from 0.5527 to 0.5631 after adding the additional variable. This suggests the model is able to explain a bit more variation and has slightly more predictive power than the bivariate regression.
+
+Let's plot the regression line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctNotHSGrad,}
+  \DataTypeTok{y =}\NormalTok{ communities}\OperatorTok{$}\NormalTok{PctUnemployed,}
+  \DataTypeTok{xlab =} \StringTok{"Adults without high school education (%)"}\NormalTok{,}
+  \DataTypeTok{ylab =} \StringTok{"Unemployment (%)"}\NormalTok{,}
+  \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{pch =} \DecValTok{20}\NormalTok{,}
+  \DataTypeTok{col =} \StringTok{"LightSkyBlue"}
+\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(model1, }\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-96-1.pdf}
+
+As you can see from the plot, there are strange observations at the top of the y-axis and x-axis. This is strange as no observations with no education are likely to have 100\% employment. These outliers or incorrect values will bias the results, so lets run another model without these high values using subsetting:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(PctUnemployed }\OperatorTok{~}\StringTok{ }\NormalTok{PctNotHSGrad }\OperatorTok{+}\StringTok{ }\NormalTok{PctUrban, }
+             \DataTypeTok{data =}\NormalTok{ communities [communities}\OperatorTok{$}\NormalTok{PctUnemployed }\OperatorTok{<}\StringTok{ }\DecValTok{100} 
+                          \OperatorTok{&}\StringTok{ }\NormalTok{communities}\OperatorTok{$}\NormalTok{PctNotHSGrad }\OperatorTok{<}\DecValTok{100}\NormalTok{ , ])}
+\KeywordTok{summary}\NormalTok{(model3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = PctUnemployed ~ PctNotHSGrad + PctUrban, data = communities[communities$PctUnemployed < 
+    100 & communities$PctNotHSGrad < 100, ])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-38.832  -8.043  -1.301   7.264  55.962 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   8.61368    0.64421  13.371  < 2e-16 ***
+PctNotHSGrad  0.68359    0.01528  44.745  < 2e-16 ***
+PctUrban      0.17304    0.02269   7.626 3.77e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.78 on 1948 degrees of freedom
+Multiple R-squared:  0.5204,    Adjusted R-squared:   0.52 
+F-statistic:  1057 on 2 and 1948 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+This drops the coefficient slightly for the level of education attainment. What this means is the effect (or the slope of the regression line) on unemployment is reduced. However, the result is still statistically significant as the p-value is less than 0.05.
+
+\hypertarget{additional-resources}{%
+\subsubsection{Additional Resources}\label{additional-resources}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://altaf.shinyapps.io/linear-regression}{Linear Regression - Interactive App}
+\end{itemize}
+
 
 \end{document}
