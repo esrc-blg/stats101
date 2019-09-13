@@ -1,79 +1,152 @@
-# Type coercion
-
-```{r, include = FALSE}
-par(bg = '#fdf6e3')
-```
+# Descriptive Statistics
 
 ## Seminar
 
-We often need to change the type of a variable. This can be necessary to clean data or because we add a new level to a factor like in the previous section on amending data frames. We begin by loading the england dataset that we created previously.
+Descriptive statistics are a good way to get a “feel” for the data and are an important first step for data analysis. Here we will explore two types: central tendency and dispersion.
+
+Again, as good practice, let's first clear our workspace:
 
 ```{r}
-england <- read.csv(file = "england.csv", sep = ",", header = TRUE)
+rm( list = ls() )
 ```
 
-Recall that we could not add "Brittany" as a name to our variable. This was because the variable name is stored as a factor and "Brittany" was a new category. The easiest way to add the name "Brittany" is to convert the name variable into a character variable.
+### Central tendency
 
-### Coerce a factor to character
+Central tendency explores the value of the observation at the center of a variable’s distribution. This is the average or “typical” observation. What measure of central tendency you use depends on type of variable. In general, you use the following measures:
 
-Let's check our england dataset's variable types.
+	◦ Categorical variables – mode
+	◦ Ordinal variables - median
+	◦ Continuous variables – mean
+	
+As a recap:
+
+	◦ Categorical variables are unranked categories, such as political parties.
+	◦ Ordinal variables have categories that are ranked on a scale, i.e. council tax bands.
+	◦ Continuous variables have integer values and are simply not countable, i.e.income.
+	◦ Count variables represent countable data such as crime incidents
+	◦ Binary variables have only two categories i.e. employed or unemployed.
+
+Let's first open some real data again:
+
+```{r}
+dat1 <- read.csv("non_western_immigrants.csv", stringsAsFactors = FALSE)
+dim (dat1)
+```
+
+We can explore this in R by summarising our data:
 .
 ```{r}
-str(england)
+summary( dat1)
 ```
 
-The variable "name" is a factor variable and needs to be converted to a character variable. We coerce the variable into a different type using the `as.character()` function.
+However, this can be less useful when you have many variables in the data frame. So instead you can summzarise the variables of interest by subsetting:
 
 ```{r}
-england$name <- as.character(england$name)
+summary (dat1[ , c("IMMBRIT", "over.estimate")])
 ```
 
-Let's inspect the variable types of our dataset again:
+Here the mean and median is reported. Again the median is relevant for ordinal values, while the mean is best for continuous, count and binary variables. 
+
+Large differences between the median and mean could indicate that a variable is skewed; when a variable has extreme values or many 0s which drags the mean either side of the median. For example, we often refer to "median incomes," even though income is a continous variable. Here the median is used because the mean is dragged to the right by extremely wealthy outliers, while most incomes are in fact clustered as the lower end. The median income in the UK for 2014/15, before housing costs, was £473 per week. But for the mean, weekly income is placed at £581.
+
+You may have noticed that the mode is not reported. To gain the mode you can create a frequency table and then use the order function to display the most common categories first. This is done by using the table and order functions:
 
 ```{r}
-str(england)
+a <- table(dat1$party_self)
+a[order(a, decreasing = TRUE)]
 ```
 
-The variable name is now a character variable. We now change the last value of the name variable into Brittany. 
+As you can see, category 7 is the most common category, with the number of observations reported below the category.
+
+
+### Dispersion
+
+Dispersion measures the spread of values within a variable. Again, the precise measure of dispersion depends on the level of measurement:
+
+	◦ Categorical/binary variables – proportion of each category
+	◦ Ordinal variables – range or interquartile range
+	◦ Continuous/count variables – variance or the standard deviation
+	
+	
+***Categorical variables and proportional percentages***
+
+Let's first start with categorical variables (not this is also applicable for binary variables). Here we should again look at the a frequency table to understand the proportion of each category, in this case the proportion of observations for each political party:
+
 
 ```{r}
-england$name[ length(england$name) ] <- "Brittany"
+#absolute frequency
+table1 <- table (dat1$party_self)
 ```
 
-Let's inspect our change.
 
 ```{r}
-england
+#and the percentages, rounded by two decimal spaces and then multiplied by 100
+round (table1 /sum(table1), 2)*100
 ```
 
-### Coerce a character variable into a factor variable
+This variable does not have labels for the categories, but by looking at the codebook of this data set we know the categories are as followed:
+  1 - Conservatives
+  2 - Labour
+  3 - SNP
+  4 - Green
+  5 - UKIP
+  6 - BNP
+  7 - Other
+  
+Perhaps this is not the best sample of our population, since there is no category for the Liberal Democrats!
 
-We can now easily convert the variable type back from character into a factor with the `as.factor()` function like so:
+
+***Ordinal variables and the interquartile range***
+
+For ordinal variables, the most useful way to explore dispersion is by looking at the interquartile range. This can be visualised by plotting a simple box plot. 
+
+Note that with plots in R we have to provide arguments to design the plot, which are seperated by commas. Below we select:
+  i)   the variable of interest within the data frame (using the $ symbol), 
+  ii)  add labels for the graph and y-axis, 
+  iii) remove the frame around the plot using the frame.plot function 
+  iv)  choose the colour.
 
 ```{r}
-england$name <- as.factor(england$name)
-str(england)
+boxplot(
+  dat1$HHInc, 
+  main = "Income in the UK",
+  ylab = "Income Index", 
+  frame.plot = FALSE, 
+  col = "darkgray"
+)
 ```
 
+The box that is displayed within the plot represents the location of 50% of the data, between the 25% and 75% quartiles. The line within the box tells us the median. The two lines outside of the box shows us the data that falls within 1.5 times the quartiles.
 
-### Coerce a character variable into a numeric variable
 
-In R missing vlues are called `NA` for numeric types and `""` for character types. When we use load third party data, the coding often differs. This can happen, for instance, due to data entry errors.
+***Continuous variables and the standard deviation***
 
-We simulate a data entry error by changing the population value of Brittany to a character value.
+For continuous (and count) variables we can look at the standard deviation. This tells us where 68% of the data can be found, since 68% of the data falls within one standard deviation of the mean. This can be done in R with a simple function. Here we are looking at British perceptions of non-Western immigration:
 
 ```{r}
-england$population[ length(england$population) ] <- "mistake"
-str(england)
+sd(dat1$IMMBRIT)
 ```
 
-Notice, that the variable population is now a character vector instead of a numeric vector. Whenever numbers and text are mixed, R will automatically treat the vector as a character vector.
-
-We can convert the population variable back into a numeric variable using the `as.numeric()` function. All values that are not recognised as numbers will be changed to `NA`.
+We can then compare this to the mean, which is another way to see if a continous variable is skewed:
 
 ```{r}
-england$population <- as.numeric(england$population)
-str(england)
-england
+mean(dat1$IMMBRIT)
 ```
 
+With the standard deviation at 21 and the mean at 29, we can see there is a large gap which indicates skewedness. But we can also simply visualise this by plotting the density of the variable:
+
+```{r}
+plot(density(dat1$IMMBRIT))
+```
+
+As we can see most of the data is in the left hand side of the graph with fewer larger values on the far right of the graph. This drags the mean to the right which explains the large difference with the standard deviation. In this case it would be more appropriate to use the median (as is the case with income in the example above). When we run the median below, it is much closer to the centre of the data:
+
+```{r}
+median(dat1$IMMBRIT)
+```
+
+To clear the graphs from our workspace, we can use the dev.off function with brackets:
+
+```{r}
+dev.off()
+```
