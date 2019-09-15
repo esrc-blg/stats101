@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="seminar6.html"><a href="seminar6.html"><i class="fa fa-check"></i><b>6</b> Correlations and differences in means</a><ul>
 <li class="chapter" data-level="6.1" data-path="seminar6.html"><a href="seminar6.html#seminar-4"><i class="fa fa-check"></i><b>6.1</b> Seminar</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="seminar6.html"><a href="seminar6.html#bi-variate-relationships"><i class="fa fa-check"></i><b>6.1.1</b> Bi-variate relationships</a></li>
+<li class="chapter" data-level="6.1.1" data-path="seminar6.html"><a href="seminar6.html#bivariate-relationships"><i class="fa fa-check"></i><b>6.1.1</b> Bivariate relationships</a></li>
 <li class="chapter" data-level="6.1.2" data-path="seminar6.html"><a href="seminar6.html#hypothesis-testing"><i class="fa fa-check"></i><b>6.1.2</b> Hypothesis testing</a></li>
 <li class="chapter" data-level="6.1.3" data-path="seminar6.html"><a href="seminar6.html#t-test-difference-in-means"><i class="fa fa-check"></i><b>6.1.3</b> T-test (difference in means)</a></li>
 <li class="chapter" data-level="6.1.4" data-path="seminar6.html"><a href="seminar6.html#relationships-between-continuous-variables"><i class="fa fa-check"></i><b>6.1.4</b> Relationships between continuous variables</a></li>
@@ -214,9 +214,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 6</span> Correlations and differences in means</h1>
 <div id="seminar-4" class="section level2">
 <h2><span class="header-section-number">6.1</span> Seminar</h2>
-<p>In this session, we will cover bi-variate relationships, that is relationships between two variables. For relationships between two continuous variables, we will look at correlations and plots and for relationships between a continuous dependent variable and a binary independent variable, we will look at differences in means.</p>
-<div id="bi-variate-relationships" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Bi-variate relationships</h3>
+<p>In this session, we will cover bivariate relationships, that is relationships between two variables. For relationships between two continuous variables, we will look at correlations and plots and for relationships between a continuous dependent variable and a binary independent variable, we will look at differences in means.</p>
+<div id="bivariate-relationships" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Bivariate relationships</h3>
 <p>In data analysis we are mostly interested in understanding the relationships between two (or more) variables. For instance, between a predictor (independent variable) and an outcome of interest (dependent variable). Summary statistics are often the first steps in trying to understand relationships between variables.</p>
 <p>Initially we might want to visualise a relationship between an independent variable and a dependent variable (outcome). For example, we might want to see how two categories are related to an outcome of interest.</p>
 <p>Again, as good practice, let’s first clear our workspace before we start:</p>
@@ -255,8 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="hypothesis-testing" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> Hypothesis testing</h3>
-<p>Because relationships can occur by chance, we engage in hyp</p>
-<p>Hypotheis testing is central to statistics. We form our own hypothesis about a potential relationship between variables and then compare this against what is known as the null hypothesis. The null hypothesis represents the notion that nothing special has occured and that the relationship we are observing could only have occured by chance, i.e. getting heads when flipping a coin.</p>
+<p>Because relationships can occur by chance, hypotheis testing is central to statistics. The first step is to form our own hypothesis about a potential relationship between variables and then compare this against what is known as the null hypothesis. The null hypothesis represents the notion that nothing special has occured and that the relationship we are observing has only occured by chance, i.e. getting heads when flipping a coin.</p>
 <p>In the lecture slides, we cover this by exploring the Lady Tea Tasting Test (Fisher, 1925). When running statistics in R and other statistical packages, most models report a t-statistic and p-value, which we then informs us of whether we should reject the null hypothesis.</p>
 <p>The t-statistic is easy to interpret. While we know 1 standard deviation from the mean represents 68% of the distribution, more than 1.96 deviations is more than 95% of the distribution. Therefore, if the t-statistic is higher than an absolute value of 1.96 (either 1.96 or -1.96), then the estimate we observe falls outside 95% of possible resampled estimations and is simply too rare to have occured by chance.</p>
 <p>The p-value is based on the t-statistic and provides the actually probability that a estimate occured by chance.

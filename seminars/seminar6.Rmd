@@ -72,7 +72,7 @@ This brings us to the importance of hypothesis testing.
 
 ### Hypothesis testing
 
-Because relationships can occur by chance, hypotheis testing is central to statistics. The first step is to form our own hypothesis about a potential relationship between variables and then compare this against what is known as the null hypothesis. The null hypothesis represents the notion that nothing special has occured and that the relationship we are observing could only have occured by chance, i.e. getting heads when flipping a coin.
+Because relationships can occur by chance, hypotheis testing is central to statistics. The first step is to form our own hypothesis about a potential relationship between variables and then compare this against what is known as the null hypothesis. The null hypothesis represents the notion that nothing special has occured and that the relationship we are observing has only occured by chance, i.e. getting heads when flipping a coin.
 
 In the lecture slides, we cover this by exploring the Lady Tea Tasting Test (Fisher, 1925). When running statistics in R and other statistical packages, most models report a t-statistic and p-value, which we then informs us of whether we should reject the null hypothesis.
 
