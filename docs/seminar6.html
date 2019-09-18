@@ -231,27 +231,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r">dat1<span class="op">$</span>conservatives &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
 dat1<span class="op">$</span>labour &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</code></pre>
 <p>So we create new variables within our dataframe using categories from the party_self variable. == 1 is the category we are choosing. If the ifelse statement is true, they do identify with that party, we code yes as a 1 and no as a 0.</p>
-<p>We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party and then for the Labour party:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># separte plot window into 1 row and 2 columns</span>
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
-
-<span class="kw">boxplot</span>(
+<p>We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(
   dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>conservatives<span class="op">==</span><span class="dv">1</span>],
   <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;Conservatives&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
   <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>
-)
-
-<span class="kw">boxplot</span>(
+)</code></pre>
+<p><img src="stats101_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>and then for the Labour party:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(
   dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>labour<span class="op">==</span><span class="dv">1</span>],
   <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,
   <span class="dt">xlab =</span> <span class="st">&quot;Labour&quot;</span>,
   <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
   <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>
 )</code></pre>
-<p><img src="stats101_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
-<p>Note: If you want to reset the plot window to one row and 1 column you need to run <code>par(mfrow=c(1,1)</code>.</p>
+<p><img src="stats101_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants.</p>
 <p>The higher values for the Labour party could be due to high Labour support in diverse urban centres such as London. Yet, these are just samples and a snapshot of the possible relationship.Samples are never the same and vary. For instance, crime is not statistic and will vary over time and space.</p>
 <p>Can we be sure that this result did not simply occur by chance?</p>

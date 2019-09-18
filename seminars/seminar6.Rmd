@@ -38,12 +38,9 @@ dat1$labour <- ifelse(dat1$party_self == 2, yes = 1, no = 0)
 
 So we create new variables within our dataframe using categories from the party_self variable. == 1 is the category we are choosing. If the ifelse statement is true, they do identify with that party, we code yes as a 1 and no as a 0.
 
-We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party and then for the Labour party:
+We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party:
 
 ```{r}
-# separte plot window into 1 row and 2 columns
-par(mfrow=c(1,2))
-
 boxplot(
   dat1$IMMBRIT[dat1$conservatives==1],
   frame.plot = FALSE,
@@ -51,7 +48,11 @@ boxplot(
   ylim = c(0, 100),
   col = "blue"
 )
+```
 
+and then for the Labour party:
+
+```{r}
 boxplot(
   dat1$IMMBRIT[dat1$labour==1],
   frame.plot = FALSE,
@@ -60,12 +61,6 @@ boxplot(
   col = "red"
 )
 ```
-
-```{r echo=FALSE}
-par(mfrow = c(1,1))
-```
-
-Note: If you want to reset the plot window to one row and 1 column you need to run `par(mfrow=c(1,1)`.
 
 Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants. 
 

@@ -1352,13 +1352,10 @@ We need to first create two new dummy variables from the categorical variable th
 
 So we create new variables within our dataframe using categories from the party\_self variable. == 1 is the category we are choosing. If the ifelse statement is true, they do identify with that party, we code yes as a 1 and no as a 0.
 
-We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party and then for the Labour party:
+We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# separte plot window into 1 row and 2 columns}
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-
 \KeywordTok{boxplot}\NormalTok{(}
 \NormalTok{  dat1}\OperatorTok{$}\NormalTok{IMMBRIT[dat1}\OperatorTok{$}\NormalTok{conservatives}\OperatorTok{==}\DecValTok{1}\NormalTok{],}
   \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
@@ -1366,7 +1363,15 @@ We can now run plots for the Conservatives and Labour party. We need to select t
   \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{),}
   \DataTypeTok{col =} \StringTok{"blue"}
 \NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-74-1.pdf}
+
+and then for the Labour party:
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{boxplot}\NormalTok{(}
 \NormalTok{  dat1}\OperatorTok{$}\NormalTok{IMMBRIT[dat1}\OperatorTok{$}\NormalTok{labour}\OperatorTok{==}\DecValTok{1}\NormalTok{],}
   \DataTypeTok{frame.plot =} \OtherTok{FALSE}\NormalTok{,}
@@ -1377,9 +1382,7 @@ We can now run plots for the Conservatives and Labour party. We need to select t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{stats101_files/figure-latex/unnamed-chunk-74-1.pdf}
-
-Note: If you want to reset the plot window to one row and 1 column you need to run \texttt{par(mfrow=c(1,1)}.
+\includegraphics{stats101_files/figure-latex/unnamed-chunk-75-1.pdf}
 
 Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants.
 
