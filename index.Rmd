@@ -19,4 +19,5 @@ By the end of the course, you should be able to understand fundamental research 
 
 <div class="container btn-container">
   <button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/stats101/raw/master/admin/slides.pdf');">Slides</button>
+  <button type = "button" class = "btn btn-lg btn-primary" onclick="window.open('https://github.com/esrc-blg/stats101/raw/master/data/all data sets.zip');">Data sets</button>
 </div>
