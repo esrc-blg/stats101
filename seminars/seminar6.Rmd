@@ -65,6 +65,7 @@ boxplot(
 par(mfrow = c(1,1))
 ```
 
+Note: If you want to reset the plot window to one row and 1 column you need to run `par(mfrow=c(1,1)`.
 
 Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants. 
 
