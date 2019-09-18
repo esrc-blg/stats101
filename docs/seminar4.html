@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Data Import (from csv, txt, and excel) and Saving Data Frames | Introduction to Statistics</title>
   <meta name="description" content="Chapter 4 Data Import (from csv, txt, and excel) and Saving Data Frames | Introduction to Statistics" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Data Import (from csv, txt, and excel) and Saving Data Frames | Introduction to Statistics" />
   <meta property="og:type" content="book" />
@@ -62,6 +62,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -223,14 +224,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Create a new R script and save it as day1.R to your <code>Stats101</code> directory.</p>
 <p>At the beginning of each new script, we want to clear the workspace. The workspace is stored in working memory on our computer. If we do not clear it for a new script, it becomes too full over time. Our computer will slow down and it will become difficult for us to know which objects are stored in working memory.</p>
 <p>Again, as we are starting a new script we should check the contents of our workspace like so:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="co"># check workspace</span></a>
-<a class="sourceLine" id="cb72-2" title="2"><span class="kw">ls</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check workspace</span>
+<span class="kw">ls</span>()</code></pre>
 <p>Again to remove a specific object, we use the <code>rm()</code> function which stands for remove. Within the round brackets, we put the name of the object we want to remove. We could remove the object <code>a</code> like so:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="co"># delete variable &#39;a&#39; from workspace</span></a>
-<a class="sourceLine" id="cb73-2" title="2"><span class="kw">rm</span>(a)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># delete variable &#39;a&#39; from workspace</span>
+<span class="kw">rm</span>(a)</code></pre>
 <p>At the beginning of each script, we should always clear the entire workspace. We can do so in the following way:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="co"># delete everything from workspace</span></a>
-<a class="sourceLine" id="cb74-2" title="2"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># delete everything from workspace</span>
+<span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</code></pre>
 <p>You can also clear text from the console window. To do so press Crtl+l on Windows or Command+l on Mac.</p>
 </div>
 <div id="loading-data" class="section level3">
@@ -243,16 +244,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>One of the most common file types is <code>.csv</code> which means comma separated values. Columns are separated by commas and rows by line breaks.</p>
 <p>Essentially, its best to work with this data format as it can be easily loaded into R, but also easy opening outside of R.</p>
 <p>The dataset’s name is “non_western_immigrants.csv”. To load it, we use the <code>read.csv()</code> function.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>)</code></pre>
 </div>
 <div id="importing-a-dataset-in-excel-xlsx-format" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> Importing a dataset in Excel (xlsx) format</h3>
 <p>Another common file format is Microsoft’s Excel <code>xlsx</code> format. We will load a dataset in this format now. To do so, we will need to install a package first. Packages are additional functions that we can add to R. A package is like an app on our phones.</p>
 <p>We install the <code>readxl</code> package using <code>install.packages("readxl")</code>.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</code></pre>
 <p>We only need to install a package once. It does not hurt to do it more often though, because every time we install, it will install the most recent version of the package.</p>
 <p>Once a package is installed, we need to load it using the <code>library()</code> function.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">library</span>(readxl)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)</code></pre>
 <p>To load the excel file, we can now use the <code>read_excel()</code> function that is included in the <code>readxl</code> library. We need to provide the following arguments to the function:</p>
 <table>
 <thead>
@@ -273,12 +274,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Now, let’s load the file:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">dat2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;non_western_immigrants.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;non_western_immigrants.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre>
 </div>
 <div id="importing-a-dataset-in-rdata-format" class="section level3">
 <h3><span class="header-section-number">4.1.5</span> Importing a dataset in RData format</h3>
 <p>The native file format of R is called <code>.RData</code>. To load files saved in this format, we use the <code>load()</code> function like so:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;non_western_immigrants.RData&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;non_western_immigrants.RData&quot;</span>)</code></pre>
 <p>Notice that we usually need to assign the object we load to using the <code>&lt;-</code> operator. The <code>load()</code> function is an exception where we do not need to do this.</p>
 </div>
 <div id="importing-a-dataset-in-.txt-format." class="section level3">
@@ -307,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">dat3 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;non_western_immigrants.txt&quot;</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat3 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;non_western_immigrants.txt&quot;</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</code></pre>
 </div>
 <div id="saving-data-frames" class="section level3">
 <h3><span class="header-section-number">4.1.7</span> Saving data frames</h3>
@@ -343,12 +344,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Lets save the data we have open on pereceptions of non-western immigration. It is important to select a new file name, i.e. “newdata.csv”, otherwise R overwrites the original dataframe and data may be lost. If updating a dataframe, it is good practice to save a file as V1.0, then V1.1 and so on. Let’s try this below:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">write.table</span>(dat3, </a>
-<a class="sourceLine" id="cb81-2" title="2">            <span class="dt">file =</span> <span class="st">&quot;non_western_immigrants_V1.1.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb81-3" title="3">            <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>,</a>
-<a class="sourceLine" id="cb81-4" title="4">            <span class="dt">row.names =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb81-5" title="5">            <span class="dt">col.names =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb81-6" title="6">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(dat3, 
+            <span class="dt">file =</span> <span class="st">&quot;non_western_immigrants_V1.1.csv&quot;</span>,
+            <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>,
+            <span class="dt">row.names =</span> <span class="ot">FALSE</span>,
+            <span class="dt">col.names =</span> <span class="ot">TRUE</span>
+)</code></pre>
 
 </div>
 </div>

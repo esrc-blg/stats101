@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Descriptive Statistics | Introduction to Statistics</title>
   <meta name="description" content="Chapter 5 Descriptive Statistics | Introduction to Statistics" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Descriptive Statistics | Introduction to Statistics" />
   <meta property="og:type" content="book" />
@@ -62,6 +62,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -216,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Seminar</h2>
 <p>Descriptive statistics are a good way to get a “feel” for the data and are an important first step for data analysis. Here we will explore two types: central tendency and dispersion.</p>
 <p>Again, as good practice, let’s first clear our workspace:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</code></pre>
 <div id="central-tendency" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> Central tendency</h3>
 <p>Central tendency explores the value of the observation at the center of a variable’s distribution. This is the average or “typical” observation. What measure of central tendency you use depends on type of variable. In general, you use the following measures:</p>
@@ -230,12 +231,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ◦ Count variables represent countable data such as crime incidents
 ◦ Binary variables have only two categories i.e. employed or unemployed.</code></pre>
 <p>Let’s first open some real data again:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="kw">dim</span> (dat1)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+<span class="kw">dim</span> (dat1)</code></pre>
 <pre><code>[1] 1049   13</code></pre>
 <p>We can explore this in R by summarising our data:
 .</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">summary</span>( dat1)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>( dat1)</code></pre>
 <pre><code>    IMMBRIT       over.estimate         RSex            RAge      
  Min.   :  0.00   Min.   :0.0000   Min.   :1.000   Min.   :17.00  
  1st Qu.: 10.00   1st Qu.:0.0000   1st Qu.:1.000   1st Qu.:36.00  
@@ -265,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  3rd Qu.:7.000  
  Max.   :7.000  </code></pre>
 <p>However, this can be less useful when you have many variables in the data frame. So instead you can summzarise the variables of interest by subsetting:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">summary</span> (dat1[ , <span class="kw">c</span>(<span class="st">&quot;IMMBRIT&quot;</span>, <span class="st">&quot;over.estimate&quot;</span>)])</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span> (dat1[ , <span class="kw">c</span>(<span class="st">&quot;IMMBRIT&quot;</span>, <span class="st">&quot;over.estimate&quot;</span>)])</code></pre>
 <pre><code>    IMMBRIT       over.estimate   
  Min.   :  0.00   Min.   :0.0000  
  1st Qu.: 10.00   1st Qu.:0.0000  
@@ -276,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here the mean and median is reported. Again the median is relevant for ordinal values, while the mean is best for continuous, count and binary variables.</p>
 <p>Large differences between the median and mean could indicate that a variable is skewed; when a variable has extreme values or many 0s which drags the mean either side of the median. For example, we often refer to “median incomes,” even though income is a continous variable. Here the median is used because the mean is dragged to the right by extremely wealthy outliers, while most incomes are in fact clustered as the lower end. The median income in the UK for 2014/15, before housing costs, was £473 per week. But for the mean, weekly income is placed at £581.</p>
 <p>You may have noticed that the mode is not reported. To gain the mode you can create a frequency table and then use the order function to display the most common categories first. This is done by using the table and order functions:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">a &lt;-<span class="st"> </span><span class="kw">table</span>(dat1<span class="op">$</span>party_self)</a>
-<a class="sourceLine" id="cb91-2" title="2">a[<span class="kw">order</span>(a, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)]</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">table</span>(dat1<span class="op">$</span>party_self)
+a[<span class="kw">order</span>(a, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)]</code></pre>
 <pre><code>
   7   1   2   6   5   4   3 
 383 284 280  32  31  23  16 </code></pre>
@@ -291,10 +292,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ◦ Continuous/count variables – variance or the standard deviation</code></pre>
 <p><strong><em>Categorical variables and proportional percentages</em></strong></p>
 <p>Let’s first start with categorical variables (not this is also applicable for binary variables). Here we should again look at the a frequency table to understand the proportion of each category, in this case the proportion of observations for each political party:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="co">#absolute frequency</span></a>
-<a class="sourceLine" id="cb94-2" title="2">table1 &lt;-<span class="st"> </span><span class="kw">table</span> (dat1<span class="op">$</span>party_self)</a></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="co">#and the percentages, rounded by two decimal spaces and then multiplied by 100</span></a>
-<a class="sourceLine" id="cb95-2" title="2"><span class="kw">round</span> (table1 <span class="op">/</span><span class="kw">sum</span>(table1), <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#absolute frequency</span>
+table1 &lt;-<span class="st"> </span><span class="kw">table</span> (dat1<span class="op">$</span>party_self)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#and the percentages, rounded by two decimal spaces and then multiplied by 100</span>
+<span class="kw">round</span> (table1 <span class="op">/</span><span class="kw">sum</span>(table1), <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></code></pre>
 <pre><code>
  1  2  3  4  5  6  7 
 27 27  2  2  3  3 37 </code></pre>
@@ -314,30 +315,30 @@ i) the variable of interest within the data frame (using the $ symbol),
 ii) add labels for the graph and y-axis,
 iii) remove the frame around the plot using the frame.plot function
 iv) choose the colour.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">boxplot</span>(</a>
-<a class="sourceLine" id="cb97-2" title="2">  dat1<span class="op">$</span>HHInc, </a>
-<a class="sourceLine" id="cb97-3" title="3">  <span class="dt">main =</span> <span class="st">&quot;Income in the UK&quot;</span>,</a>
-<a class="sourceLine" id="cb97-4" title="4">  <span class="dt">ylab =</span> <span class="st">&quot;Income Index&quot;</span>, </a>
-<a class="sourceLine" id="cb97-5" title="5">  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb97-6" title="6">  <span class="dt">col =</span> <span class="st">&quot;darkgray&quot;</span></a>
-<a class="sourceLine" id="cb97-7" title="7">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(
+  dat1<span class="op">$</span>HHInc, 
+  <span class="dt">main =</span> <span class="st">&quot;Income in the UK&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Income Index&quot;</span>, 
+  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>, 
+  <span class="dt">col =</span> <span class="st">&quot;darkgray&quot;</span>
+)</code></pre>
 <p><img src="stats101_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>The box that is displayed within the plot represents the location of 50% of the data, between the 25% and 75% quartiles. The line within the box tells us the median. The two lines outside of the box shows us the data that falls within 1.5 times the quartiles.</p>
 <p><strong><em>Continuous variables and the standard deviation</em></strong></p>
 <p>For continuous (and count) variables we can look at the standard deviation. This tells us where 68% of the data can be found, since 68% of the data falls within one standard deviation of the mean. This can be done in R with a simple function. Here we are looking at British perceptions of non-Western immigration:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">sd</span>(dat1<span class="op">$</span>IMMBRIT)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(dat1<span class="op">$</span>IMMBRIT)</code></pre>
 <pre><code>[1] 21.06331</code></pre>
 <p>We can then compare this to the mean, which is another way to see if a continous variable is skewed:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">mean</span>(dat1<span class="op">$</span>IMMBRIT)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dat1<span class="op">$</span>IMMBRIT)</code></pre>
 <pre><code>[1] 29.03051</code></pre>
 <p>With the standard deviation at 21 and the mean at 29, we can see there is a large gap which indicates skewedness. But we can also simply visualise this by plotting the density of the variable:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">plot</span>(<span class="kw">density</span>(dat1<span class="op">$</span>IMMBRIT))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(dat1<span class="op">$</span>IMMBRIT))</code></pre>
 <p><img src="stats101_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>As we can see most of the data is in the left hand side of the graph with fewer larger values on the far right of the graph. This drags the mean to the right which explains the large difference with the standard deviation. In this case it would be more appropriate to use the median (as is the case with income in the example above). When we run the median below, it is much closer to the centre of the data:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">median</span>(dat1<span class="op">$</span>IMMBRIT)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(dat1<span class="op">$</span>IMMBRIT)</code></pre>
 <pre><code>[1] 25</code></pre>
 <p>To clear the graphs from our workspace, we can use the dev.off function with brackets:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">dev.off</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dev.off</span>()</code></pre>
 <pre><code>null device 
           1 </code></pre>
 

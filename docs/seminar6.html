@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Correlations and differences in means | Introduction to Statistics</title>
   <meta name="description" content="Chapter 6 Correlations and differences in means | Introduction to Statistics" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Correlations and differences in means | Introduction to Statistics" />
   <meta property="og:type" content="book" />
@@ -62,6 +62,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -220,34 +221,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In data analysis we are mostly interested in understanding the relationships between two (or more) variables. For instance, between a predictor (independent variable) and an outcome of interest (dependent variable). Summary statistics are often the first steps in trying to understand relationships between variables.</p>
 <p>Initially we might want to visualise a relationship between an independent variable and a dependent variable (outcome). For example, we might want to see how two categories are related to an outcome of interest.</p>
 <p>Again, as good practice, let’s first clear our workspace before we start:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</code></pre>
 <p>Let’s open the data again:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb108-2" title="2"><span class="kw">dim</span> (dat1)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;non_western_immigrants.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+<span class="kw">dim</span> (dat1)</code></pre>
 <pre><code>[1] 1049   13</code></pre>
 <p>Here we will compare if there are differences in perceptions of non-Western immigrants between those that identify with the Convervatives and those that support the Labour party.</p>
 <p>We need to first create two new dummy variables from the categorical variable that lists identified political parties. These two binary variables will tell us observations where someone identifies with the Conservatives (1=yes and 0 = no) and the same for the Labour party (1=yes and 0=no). Here we have to use the ifelse function:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1">dat1<span class="op">$</span>conservatives &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb110-2" title="2">dat1<span class="op">$</span>labour &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat1<span class="op">$</span>conservatives &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
+dat1<span class="op">$</span>labour &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat1<span class="op">$</span>party_self <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</code></pre>
 <p>So we create new variables within our dataframe using categories from the party_self variable. == 1 is the category we are choosing. If the ifelse statement is true, they do identify with that party, we code yes as a 1 and no as a 0.</p>
-<p>We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="kw">boxplot</span>(</a>
-<a class="sourceLine" id="cb111-2" title="2">  dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>conservatives<span class="op">==</span><span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb111-3" title="3">  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb111-4" title="4">  <span class="dt">xlab =</span> <span class="st">&quot;Conservatives&quot;</span>,</a>
-<a class="sourceLine" id="cb111-5" title="5">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb111-6" title="6">  <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span></a>
-<a class="sourceLine" id="cb111-7" title="7">)</a></code></pre></div>
+<p>We can now run plots for the Conservatives and Labour party. We need to select the arguments as before, including appropriate colours for the parties. Here we also set the ylim to show a scale of the data from 0-100. First for the Conservative party and then for the Labour party:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># separte plot window into 1 row and 2 columns</span>
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+
+<span class="kw">boxplot</span>(
+  dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>conservatives<span class="op">==</span><span class="dv">1</span>],
+  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;Conservatives&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+  <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>
+)
+
+<span class="kw">boxplot</span>(
+  dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>labour<span class="op">==</span><span class="dv">1</span>],
+  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;Labour&quot;</span>,
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+  <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>
+)</code></pre>
 <p><img src="stats101_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
-<p>and then for the Labour party:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="kw">boxplot</span>(</a>
-<a class="sourceLine" id="cb112-2" title="2">  dat1<span class="op">$</span>IMMBRIT[dat1<span class="op">$</span>labour<span class="op">==</span><span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb112-3" title="3">  <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb112-4" title="4">  <span class="dt">xlab =</span> <span class="st">&quot;Labour&quot;</span>,</a>
-<a class="sourceLine" id="cb112-5" title="5">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb112-6" title="6">  <span class="dt">col =</span> <span class="st">&quot;red&quot;</span></a>
-<a class="sourceLine" id="cb112-7" title="7">)</a></code></pre></div>
-<p><img src="stats101_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>Overall, there appears to be very little difference between the Conservatives and Labour distributions in regards to perceptions of non-Western immigrants. The dots at the top of the scale represent outlier cases, where perceptions overestimate the number of immigrants.</p>
 <p>The higher values for the Labour party could be due to high Labour support in diverse urban centres such as London. Yet, these are just samples and a snapshot of the possible relationship.Samples are never the same and vary. For instance, crime is not statistic and will vary over time and space.</p>
 <p>Can we be sure that this result did not simply occur by chance?</p>
@@ -270,12 +273,12 @@ If we reject the null hypothesis then the relationship we observe is statistical
 <p>The t-test is the appropriate test-statistic. Our interval-level dependent variable is <code>wdi_gdpc</code> which is GDP per capita taken from the World Development Indicators of the World Bank. Our binary independent variable is <code>h_j</code>.</p>
 <p>Let’s check the summary statistics of our dependent variable GDP per captia using the <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/summary"><code>summary()</code></a>. It returns several descriptive statistics as well as the number of NA observations (missing values). Missing values mean that we have no information on the correct value of the variable for an observation. Missing values may be missing for many different reasons. We need to be aware of missings because we cannot calculate with missings.</p>
 <p>Lets bring the data in:]</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QoG2012.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="kw">summary</span>(dat2<span class="op">$</span>wdi_gdpc)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QoG2012.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dat2<span class="op">$</span>wdi_gdpc)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
   226.2  1768.0  5326.1 10184.1 12976.5 63686.7      16 </code></pre>
 <p>We use the <code>which()</code> function to identify the row-numbers of the countries in our dataset that have a colonial history. The code below returns the row index numbers of countries with a history of colonialisation.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">which</span>(dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>  [1]   3   5   6   8  11  12  13  15  17  18  20  21  22  23  24  26  27
  [18]  29  30  32  33  34  35  36  39  40  41  42  43  45  46  48  50  51
  [35]  52  53  54  56  58  61  62  64  66  67  69  70  71  72  73  74  77
@@ -285,15 +288,15 @@ If we reject the null hypothesis then the relationship we observe is statistical
 [103] 162 164 165 166 169 172 173 174 175 176 179 180 183 185 187 188 190
 [120] 191 192 194</code></pre>
 <p>Now, we can explore conditional means. Below we access the variable that we want (<code>wdi_gdpc</code>) with the dollar sign and the rows in square brackets. The code below returns the per capita wealth of the countries with a colonial history:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="kw">mean</span>( dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>[1] 6599.714</code></pre>
 <p>Now, go ahead and find the mean per capita wealth of countries without a colonial history:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1"><span class="kw">mean</span>( dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">0</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">0</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>[1] 16415.39</code></pre>
 <p>There is a clear numeric difference. Countries with a colonial history do appear to be significantly poorer.</p>
 <p>However, we know that samples are subject to sampling variability. We therefore need to quantify the uncertainty that results from variable samples. To assess whether we can be reasonably sure that the difference between the estimates of wealth is not due to a strange sample or by chance, we carry out the t test to assess if there is a statistically significant difference between these populations:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1"><span class="kw">t.test</span>(dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">0</span>],</a>
-<a class="sourceLine" id="cb122-2" title="2">       <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">alt =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="dt">conf =</span> <span class="fl">0.95</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">1</span>], dat2<span class="op">$</span>wdi_gdpc[dat2<span class="op">$</span>former_col <span class="op">==</span><span class="st"> </span><span class="dv">0</span>],
+       <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">alt =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="dt">conf =</span> <span class="fl">0.95</span>)</code></pre>
 <pre><code>
     Welch Two Sample t-test
 
@@ -315,7 +318,7 @@ mean of x mean of y
 <h3><span class="header-section-number">6.1.4</span> Relationships between continuous variables</h3>
 <p>One way to explore the relationship between two continous variables is to use correlation. This is a widely used as a summary statistic. Correlation is a measure of <strong>linear</strong> association. It can take values between -1 and +1. Where -1 is a perfect negative relationship, 0 is a no relationship and +1 is a perfect positive relationship. 0 means there is no relationship, as would be expected if the null hypothesis was true.</p>
 <p>We estimate the correlation coefficient in the following:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1"><span class="kw">cor</span>(<span class="dt">y =</span> dat2<span class="op">$</span>undp_hdi, <span class="dt">x =</span> dat2<span class="op">$</span>wbgi_cce, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(<span class="dt">y =</span> dat2<span class="op">$</span>undp_hdi, <span class="dt">x =</span> dat2<span class="op">$</span>wbgi_cce, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</code></pre>
 <pre><code>[1] 0.6821114</code></pre>
 <table>
 <colgroup>
@@ -347,18 +350,18 @@ mean of x mean of y
 <p>Another weakness is that it is a measure of linear association only. That means, there could be a curvilinear (or non-linear) realtionship which we miss (for instance a u-shaped relationship).</p>
 <p>Often the best way to get a sense for the relationship beetween two continuous variables is visual inspection using a scatter plot. The human development index measures the quality of life and the World Bank Control of Corruption Index is a measure for the quality if institutions. We want to evaluate whether the two variables are related at all. Here, we could form the hypothesis that better insitutions improve the quality of life of citizens.</p>
 <p>To investigate this relationship, we construct a scatterplot.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb126-2" title="2">  <span class="dt">x =</span> dat2<span class="op">$</span>wbgi_cce,</a>
-<a class="sourceLine" id="cb126-3" title="3">  <span class="dt">y =</span> dat2<span class="op">$</span>undp_hdi,</a>
-<a class="sourceLine" id="cb126-4" title="4">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb126-5" title="5">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb126-6" title="6">  <span class="dt">frame =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb126-7" title="7">  <span class="dt">xlab =</span> <span class="st">&quot;World Bank Control of Corruption Index&quot;</span>,</a>
-<a class="sourceLine" id="cb126-8" title="8">  <span class="dt">ylab =</span> <span class="st">&quot;UNDP Human Development Index&quot;</span>,</a>
-<a class="sourceLine" id="cb126-9" title="9">  <span class="dt">main =</span> <span class="st">&quot;Relationship b/w Quality of Institutions and Quality of Life&quot;</span>,</a>
-<a class="sourceLine" id="cb126-10" title="10">  <span class="dt">pch =</span> <span class="dv">16</span>,</a>
-<a class="sourceLine" id="cb126-11" title="11">  <span class="dt">col =</span> <span class="st">&quot;darkgray&quot;</span></a>
-<a class="sourceLine" id="cb126-12" title="12">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  <span class="dt">x =</span> dat2<span class="op">$</span>wbgi_cce,
+  <span class="dt">y =</span> dat2<span class="op">$</span>undp_hdi,
+  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>),
+  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">frame =</span> <span class="ot">FALSE</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;World Bank Control of Corruption Index&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;UNDP Human Development Index&quot;</span>,
+  <span class="dt">main =</span> <span class="st">&quot;Relationship b/w Quality of Institutions and Quality of Life&quot;</span>,
+  <span class="dt">pch =</span> <span class="dv">16</span>,
+  <span class="dt">col =</span> <span class="st">&quot;darkgray&quot;</span>
+)</code></pre>
 <p><img src="stats101_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 <p>The plot will give you a good idea whether about whether these two variables are related or not. Sometimes, the correleation coefficient is reported.</p>
 <p>Overall, summary statistics are an important step in understanding the relationship between variables and whether such relationships occur by chance. However, this does not tell us much about the magnitude of the relationships we seek to explore. For this we must switch our attention to linear regression, which provides coefficients that can be interpreted as the extent to which a independent variable impacts a dependent variable. Linear regression also allows us to control for other independent variables which may also explain our dependent variable, i.e. alternative explainations of the outcome we are exploring.</p>
