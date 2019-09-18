@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Data Stuctures and Data Types | Introduction to Statistics</title>
   <meta name="description" content="Chapter 2 Data Stuctures and Data Types | Introduction to Statistics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Data Stuctures and Data Types | Introduction to Statistics" />
   <meta property="og:type" content="book" />
@@ -62,7 +62,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -219,16 +218,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="functions" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Functions</h3>
 <p>Functions are a set of instructions that carry out a specific task. Functions often require some input and generate some output. For example, instead of using the <code>+</code> operator for addition, we can use the <code>sum</code> function to add two or more numbers.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>[1] 15</code></pre>
 <p>In the example above, <code>1, 4, 10</code> are the inputs and 15 is the output. A function always requires the use of parenthesis or round brackets <code>()</code>. Inputs to the function are called <strong>arguments</strong> and go inside the brackets. The output of a function is displayed on the screen but we can also have the option of saving the result of the output. More on this later.</p>
 </div>
 <div id="getting-help" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Getting Help</h3>
 <p>Another useful function in R is <code>help</code> which we can use to display online documentation. For example, if we wanted to know how to use the <code>sum</code> function, we could type <code>help(sum)</code> and look at the online documentation.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(sum)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">help</span>(sum)</a></code></pre></div>
 <p>The question mark <code>?</code> can also be used as a shortcut to access online help.</p>
-<pre class="sourceCode r"><code class="sourceCode r">?sum</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">?sum</a></code></pre></div>
 <p><img src="img/rstudio_help.png" /></p>
 <p>Use the toolbar button shown in the picture above to expand and display the help in a new window.</p>
 <p>Help pages for functions in R follow a consistent layout generally include these sections:</p>
@@ -265,9 +264,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.3</span> The Assignment Operator</h3>
 <p>Now we know how to provide inputs to a function using parenthesis or round brackets <code>()</code>, but what about the output of a function?</p>
 <p>We use the assignment operator <strong><code>&lt;-</code></strong> for creating or updating objects. If we wanted to save the result of adding <code>sum(1, 4, 10)</code>, we would do the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myresult &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">myresult &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>)</a></code></pre></div>
 <p>The line above creates a new object called <code>myresult</code> in our environment and saves the result of the <code>sum(1, 4, 10)</code> in it. To see what’s in <code>myresult</code>, just type it at the console:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myresult</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">myresult</a></code></pre></div>
 <pre><code>[1] 15</code></pre>
 <p>Take a look at the <strong>Environment</strong> pane in RStudio and you’ll see <code>myresult</code> there.</p>
 <p><img src="img/rstudio_env.png" /></p>
@@ -308,40 +307,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.4</span> Vectors and subsetting</h3>
 <p>A vector is one dimensional. It can contain one element in which case it is also called a scalar or many elements. We can add and multiply vectors. Think of a vector as a row or column in your excel spreadsheet.</p>
 <p>To create a vector, we use the <code>c()</code> function, where c stands for collect. We start by creating a numeric vector.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">47</span>, <span class="dv">99</span>, <span class="dv">34</span>, <span class="dv">21</span>)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">47</span>, <span class="dv">99</span>, <span class="dv">34</span>, <span class="dv">21</span>)</a></code></pre></div>
 <p>Creating a character vector works in the same way. We need to use quotation marks to indicate that the data type is textual data.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Emilia&quot;</span>, <span class="st">&quot;Martin&quot;</span>, <span class="st">&quot;Agatha&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Luke&quot;</span>, <span class="st">&quot;Jacques&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Emilia&quot;</span>, <span class="st">&quot;Martin&quot;</span>, <span class="st">&quot;Agatha&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Luke&quot;</span>, <span class="st">&quot;Jacques&quot;</span>)</a></code></pre></div>
 <p>Let’s see how many elements our vector contains using the <code>length()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(vec1)</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">length</span>(vec1)</a></code></pre></div>
 <pre><code>[1] 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(vec2)</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">length</span>(vec2)</a></code></pre></div>
 <pre><code>[1] 6</code></pre>
 <p>We need one coordinate to identify a unique element in a vector. For instance, we may be interested in the first element of the vector only. We use square brackets <code>[]</code> to access a specific element. The number in square brackets is the vector element that we wish to see.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1[<span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">vec1[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>[1] 10</code></pre>
 <p>To access all elements except the first element, we use the <code>-</code> operator</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1[<span class="op">-</span><span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">vec1[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
 <pre><code>[1] 47 99 34 21</code></pre>
 <p>We can access elements 2 to 4 by using the colon <code>:</code> operator.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">vec1[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <pre><code>[1] 47 99 34</code></pre>
 <p>We can access non-adjacent elements bu using the collect function <code>c()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)]</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">vec1[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)]</a></code></pre></div>
 <pre><code>[1] 47 21</code></pre>
 <p>Finally, we combine the <code>length()</code> function with the square brackets to access the last element in our vector.</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1[ <span class="kw">length</span>(vec1) ]</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">vec1[ <span class="kw">length</span>(vec1) ]</a></code></pre></div>
 <pre><code>[1] 21</code></pre>
 </div>
 <div id="matrices" class="section level3">
 <h3><span class="header-section-number">2.1.5</span> Matrices</h3>
 <p>A matrix has two dimensions and stores data of the same type, e.g. numbers or text but never both. A matrix is always rectangular. Think of it as your excel spreadsheet - essentially, it is a data table.</p>
 <p>We create a matrix using the <code>matrix()</code> function. We need to provide the following arguments:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(
-  <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">99</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">49</span>, <span class="dv">88</span>, <span class="dv">54</span>),
-  <span class="dt">nrow =</span> <span class="dv">2</span>,
-  <span class="dt">ncol =</span> <span class="dv">3</span>,
-  <span class="dt">byrow =</span> <span class="ot">TRUE</span>
-)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
+<a class="sourceLine" id="cb32-2" title="2">  <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">99</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">49</span>, <span class="dv">88</span>, <span class="dv">54</span>),</a>
+<a class="sourceLine" id="cb32-3" title="3">  <span class="dt">nrow =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb32-4" title="4">  <span class="dt">ncol =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb32-5" title="5">  <span class="dt">byrow =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb32-6" title="6">)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -369,31 +368,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>To display the matrix, we simply call the object by its name (in this case mat1).</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">mat1</a></code></pre></div>
 <pre><code>     [,1] [,2] [,3]
 [1,]   99   17   19
 [2,]   49   88   54</code></pre>
 <p>To access a unique element in a matrix, we need 2 coordinates. First, a row coordinate and second, a column coordinate. We use square brackets and separate the coordinates with a comma <code>[ , ]</code>. The row coordinate goes before the comma and the column coordinate after.</p>
 <p>We can access the the second row and third column like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1[<span class="dv">2</span>, <span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">mat1[<span class="dv">2</span>, <span class="dv">3</span>]</a></code></pre></div>
 <pre><code>[1] 54</code></pre>
 <p>To display an entire column, we specify the column we want to display and leave the row coordinate empty like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># display the 2nd column</span>
-mat1[ , <span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># display the 2nd column</span></a>
+<a class="sourceLine" id="cb37-2" title="2">mat1[ , <span class="dv">2</span>]</a></code></pre></div>
 <pre><code>[1] 17 88</code></pre>
 <p>Similarly, to display the entire second row, we specify the row coordinate but leave the column coordinate empty.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1[<span class="dv">2</span>, ]</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">mat1[<span class="dv">2</span>, ]</a></code></pre></div>
 <pre><code>[1] 49 88 54</code></pre>
 </div>
 <div id="arrays" class="section level3">
 <h3><span class="header-section-number">2.1.6</span> Arrays</h3>
 <p>Arrays are similar to matrices but can contain more dimensions. You can think of an array as stacking multiple matrices. Generally, we refer to the rows, columns and layers in array. Let’s create an array with 2 rows, 3 columns and 4 layers using the <code>array()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">arr1 &lt;-<span class="st"> </span><span class="kw">array</span>(
-  <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>),
-  <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)
-)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">arr1 &lt;-<span class="st"> </span><span class="kw">array</span>(</a>
+<a class="sourceLine" id="cb41-2" title="2">  <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>),</a>
+<a class="sourceLine" id="cb41-3" title="3">  <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb41-4" title="4">)</a></code></pre></div>
 <p>To display the object, we call it by its name.</p>
-<pre class="sourceCode r"><code class="sourceCode r">arr1</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">arr1</a></code></pre></div>
 <pre><code>, , 1
 
      [,1] [,2] [,3]
@@ -418,11 +417,11 @@ mat1[ , <span class="dv">2</span>]</code></pre>
 [1,]   19   21   23
 [2,]   20   22   24</code></pre>
 <p>We can subset an array using the square brackets <code>[]</code>. To access a single element we need as many coordinates as our object has dimensions. Let’s check the number of dimensions in our object first.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(arr1)</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">dim</span>(arr1)</a></code></pre></div>
 <pre><code>[1] 2 3 4</code></pre>
 <p>The <code>dim()</code> function informs us that we have 3 dimensions. The first is of length 2, the second of length 3 and the fourth of length 4.</p>
 <p>Access the second column of the third layer on your own.</p>
-<pre class="sourceCode r collapsible"><code class="sourceCode r">arr1[ , <span class="dv">2</span>, <span class="dv">3</span>] </code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r collapsible"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">arr1[ , <span class="dv">2</span>, <span class="dv">3</span>] </a></code></pre></div>
 <pre><code>[1] 15 16</code></pre>
 
 </div>

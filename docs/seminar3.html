@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Creating and Exploring Data Frames | Introduction to Statistics</title>
   <meta name="description" content="Chapter 3 Creating and Exploring Data Frames | Introduction to Statistics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Creating and Exploring Data Frames | Introduction to Statistics" />
   <meta property="og:type" content="book" />
@@ -62,7 +62,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -219,23 +218,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="clearing-your-workspace-from-previous-work" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Clearing your workspace from previous work</h3>
 <p>To remove a specific object or in this case a matrix, we can use the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">ls</span>()</a></code></pre></div>
 <pre><code>[1] &quot;chapter_header&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(mat1)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">rm</span>(mat1)</a></code></pre></div>
 <pre><code>Warning in rm(mat1): object &#39;mat1&#39; not found</code></pre>
 <p>Otherwise we can remove everything, which is good practice when starting new work. The same can also be achieved by clicking on the yellow broomstick in the Enviornemnt and Files Panel in R Studio (top right hand panel)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">rm</span>( <span class="dt">list =</span> <span class="kw">ls</span>() )</a></code></pre></div>
 </div>
 <div id="creating-data-frames" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Creating data frames</h3>
 <p>A data frame is an object that holds data in a tabular format similar to how spreadsheets work. Variables are generally kept in columns and observations are in rows. Data frames are similar to matrices but they can store vectors of different types (e.g. numbers and text).</p>
 <p>We start by creating a data frame with the <code>data.frame()</code> function. We will give each column a name (a variable name) followed by the <code>=</code> operator and the respective vector of data that we want to assign to that column.</p>
-<pre class="sourceCode r"><code class="sourceCode r">england &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;South East&quot;</span>, <span class="st">&quot;London&quot;</span>, <span class="st">&quot;North West&quot;</span>, <span class="st">&quot;East of England&quot;</span>, <span class="st">&quot;West Midlands&quot;</span>, <span class="st">&quot;South West&quot;</span>,
-           <span class="st">&quot;Yorkshire and the Humber&quot;</span>, <span class="st">&quot;East Midlands&quot;</span>, <span class="st">&quot;North East&quot;</span>),
-  <span class="dt">population =</span> <span class="kw">c</span>(<span class="fl">8.6</span>, <span class="fl">8.2</span>, <span class="fl">7.1</span>, <span class="fl">5.9</span>, <span class="fl">5.6</span>, <span class="fl">5.3</span>, <span class="fl">5.3</span>, <span class="fl">4.5</span>, <span class="fl">2.6</span>),
-  <span class="dt">earnings =</span> <span class="kw">c</span>(<span class="fl">28.7</span>, <span class="fl">35.1</span>, <span class="fl">25.2</span>, <span class="fl">26.6</span>, <span class="fl">24.9</span>, <span class="fl">25.6</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>)
-)</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">england &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb53-2" title="2">  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;South East&quot;</span>, <span class="st">&quot;London&quot;</span>, <span class="st">&quot;North West&quot;</span>, <span class="st">&quot;East of England&quot;</span>, <span class="st">&quot;West Midlands&quot;</span>, <span class="st">&quot;South West&quot;</span>,</a>
+<a class="sourceLine" id="cb53-3" title="3">           <span class="st">&quot;Yorkshire and the Humber&quot;</span>, <span class="st">&quot;East Midlands&quot;</span>, <span class="st">&quot;North East&quot;</span>),</a>
+<a class="sourceLine" id="cb53-4" title="4">  <span class="dt">population =</span> <span class="kw">c</span>(<span class="fl">8.6</span>, <span class="fl">8.2</span>, <span class="fl">7.1</span>, <span class="fl">5.9</span>, <span class="fl">5.6</span>, <span class="fl">5.3</span>, <span class="fl">5.3</span>, <span class="fl">4.5</span>, <span class="fl">2.6</span>),</a>
+<a class="sourceLine" id="cb53-5" title="5">  <span class="dt">earnings =</span> <span class="kw">c</span>(<span class="fl">28.7</span>, <span class="fl">35.1</span>, <span class="fl">25.2</span>, <span class="fl">26.6</span>, <span class="fl">24.9</span>, <span class="fl">25.6</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb53-6" title="6">)</a></code></pre></div>
 <p>We can also display the entire dataset in spreadsheet view by clicking on the object name in the environment window.</p>
 <p><img src="img/dataframe_in_spreadsheet_view.png" /></p>
 </div>
@@ -243,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.3</span> Working with data frames</h3>
 <p>we can display the entire dataset in spreadsheet view by clicking on the object name in the environment window.</p>
 <p>Alternatively, you can call the object name to display the dataset in the console window. Let’s do so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">england</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">england</a></code></pre></div>
 <pre><code>                      name population earnings
 1               South East        8.6     28.7
 2                   London        8.2     35.1
@@ -255,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 8            East Midlands        4.5     25.0
 9               North East        2.6     25.0</code></pre>
 <p>Often, datasets are too long to be viewed to in the console window. It is a good idea to look at the first couple of rows of a datasets to get an overview of its contents. We use the square brackets <code>[]</code> to view the first five rows and all columns.</p>
-<pre class="sourceCode r"><code class="sourceCode r">england[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">england[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</a></code></pre></div>
 <pre><code>             name population earnings
 1      South East        8.6     28.7
 2          London        8.2     35.1
@@ -264,16 +263,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 5   West Midlands        5.6     24.9</code></pre>
 <p>v
 Columns in a dataframe have names. We will often need to know the name of a column/variable to access it. We use the <code>names()</code> function to view all variable names in a dataframe.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(england)</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">names</span>(england)</a></code></pre></div>
 <pre><code>[1] &quot;name&quot;       &quot;population&quot; &quot;earnings&quot;  </code></pre>
 <p>We can access the earnings variable in multiple ways. First, we can use the <code>$</code> operator. We write the name of the dataset object, followed by the <code>$</code>, followed by the variable name like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">england<span class="op">$</span>population</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">england<span class="op">$</span>population</a></code></pre></div>
 <pre><code>[1] 8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6</code></pre>
 <p>We can also use the square brackets to access the earnings column.</p>
-<pre class="sourceCode r"><code class="sourceCode r">england[, <span class="st">&quot;population&quot;</span> ]</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">england[, <span class="st">&quot;population&quot;</span> ]</a></code></pre></div>
 <pre><code>[1] 8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6</code></pre>
 <p>The square brackets are sometimes preferred because we could access multiple columns at once like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">england[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;population&quot;</span>) ]</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">england[, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;population&quot;</span>) ]</a></code></pre></div>
 <pre><code>                      name population
 1               South East        8.6
 2                   London        8.2
@@ -285,18 +284,18 @@ Columns in a dataframe have names. We will often need to know the name of a colu
 8            East Midlands        4.5
 9               North East        2.6</code></pre>
 <p>You can also explore the variable further. For instance, calculate the average population in England and then select regions that have a population higher than this average. Again the dataset object is followed by the <code>$</code>and then the variable name like so</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(england<span class="op">$</span>population)</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">mean</span>(england<span class="op">$</span>population)</a></code></pre></div>
 <pre><code>[1] 5.9</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">avg.pop =<span class="st"> </span><span class="kw">mean</span>(england<span class="op">$</span>population)
-england [england<span class="op">$</span>population <span class="op">&gt;</span><span class="st"> </span>avg.pop,
-         <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;population&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">avg.pop =<span class="st"> </span><span class="kw">mean</span>(england<span class="op">$</span>population)</a>
+<a class="sourceLine" id="cb68-2" title="2">england [england<span class="op">$</span>population <span class="op">&gt;</span><span class="st"> </span>avg.pop,</a>
+<a class="sourceLine" id="cb68-3" title="3">         <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;population&quot;</span>)]</a></code></pre></div>
 <pre><code>             name population
 1      South East        8.6
 2          London        8.2
 3      North West        7.1
 4 East of England        5.9</code></pre>
 <p>Variables come in different types such as numbers, text, logical (true/false). We need to know the type of a variable because the type affects statistical analysis. We use the <code>str()</code> function to check the type of each variable in our dataset.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(england)</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">str</span>(england)</a></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   9 obs. of  3 variables:
  $ name      : Factor w/ 9 levels &quot;East Midlands&quot;,..: 6 3 5 2 8 7 9 1 4
  $ population: num  8.6 8.2 7.1 5.9 5.6 5.3 5.3 4.5 2.6
